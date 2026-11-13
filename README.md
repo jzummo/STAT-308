@@ -10,7 +10,6 @@ Course notes for **STAT 30815**, University of Chicago, Autumn 2026.
 | **Meetings**   | Mondays and Wednesdays, 9:00–10:20 AM        |
 | **Location**   | Jones Laboratory 226                         |
 | **Term**       | September 28 – December 12, 2026             |
-| **Format**     | In-person lecture, graduate level, 100 units |
 
 ## Overview
 
