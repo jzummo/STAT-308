@@ -1,6 +1,6 @@
 # STAT 30815 — Asymptotic Theory for Time Series Analysis and Stochastic Approximation Algorithms
 
-Course notes for **STAT 30815** (also listed as STAT 3081/1, section 82272), University of Chicago, Autumn 2026.
+Course notes for **STAT 30815**, University of Chicago, Autumn 2026.
 
 ## Course info
 
