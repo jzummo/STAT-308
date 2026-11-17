@@ -15,8 +15,6 @@ Course notes for **STAT 30815**, University of Chicago, Autumn 2026.
 
 This is a graduate course on the asymptotic theory of time series, moving from classical low-dimensional results to modern high-dimensional problems, and closing with the asymptotics of stochastic gradient descent (SGD) — the optimization workhorse behind much of modern machine learning.
 
-The course is theory-first: the emphasis is on *why* estimators and algorithms behave the way they do as sample sizes grow, under dependence, and in high dimensions — not on applied data analysis.
-
 ## Topics covered
 
 ### Low-dimensional time series: a review
