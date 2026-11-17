@@ -1,0 +1,131 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mymacros}[2026/11/17 STAT 30815 notes macros]
+
+%----------Packages----------
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{dsfont}
+\RequirePackage{booktabs}
+\RequirePackage{mathrsfs}
+\RequirePackage{stmaryrd}
+\RequirePackage{enumitem}
+\RequirePackage[all]{xy}
+\RequirePackage[mathcal]{eucal}
+\RequirePackage{verbatim}  %% includes comment environment
+\RequirePackage{fullpage}  %% smaller margins
+\RequirePackage{hyperref}
+\RequirePackage{setspace}
+\RequirePackage{color,soul}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{listings}
+\RequirePackage{subcaption}
+\onehalfspacing
+
+%----------Commands----------
+
+%% Penalizes orphans
+\clubpenalty=9999
+\widowpenalty=9999
+
+% Basic probability / analysis notation
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\Pr}{\mathbb{P}} % \Pr is predefined by LaTeX
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Corr}{\operatorname{Corr}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Distributional / stochastic convergence
+\newcommand{\ed}{\overset{d}{=}}
+\newcommand{\cd}{\overset{d}{\rightarrow}}
+\newcommand{\cp}{\overset{P}{\rightarrow}}
+\newcommand{\as}{\text{a.s.}}
+\newcommand{\cas}{\overset{\as}{\rightarrow}}
+\newcommand{\cellone}{\overset{L^1}{\rightarrow}}
+
+% Text shorthand inside math mode
+% \st is defined by soul, so use \renewcommand here for LaTeX compatibility.
+\renewcommand{\st}{\text{ s.t. }}
+\newcommand{\rv}{\text{ r.v. }}
+\newcommand{\io}{\text{ i.o. }}
+\newcommand{\iid}{\overset{\mathrm{iid}}{\sim}}
+
+% Indicator notation.
+% Prefer \one in new documents; \1 is kept as a backwards-compatible alias.
+\newcommand{\one}{\mathbf{1}}
+\renewcommand{\1}{\one}
+
+% Operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\iprod}[2]{\left\langle #1,#2\right\rangle}
+
+% Spaces / independence
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\ind}{\perp\!\!\!\perp}
+
+%----------Probability Distributions----------
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\Pois}{\operatorname{Poisson}}
+\newcommand{\Exp}{\operatorname{Exponential}}
+\newcommand{\Ber}{\operatorname{Bernoulli}}
+\newcommand{\Bin}{\operatorname{Binomial}}
+\newcommand{\Unif}{\operatorname{Uniform}}
+\newcommand{\BetaDist}{\operatorname{Beta}}
+\newcommand{\Gam}{\operatorname{Gamma}}
+
+%----------Chao Gao Macros----------
+\newcommand{\lnorm}[2]{\left\|#1\right\|_{#2}}
+\newcommand{\indc}[1]{\mathbf{1}_{\left\{#1\right\}}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\hf}{1/2}
+\newcommand{\wh}{\widehat}
+\newcommand{\wt}{\widetilde}
+\newcommand{\Norm}[1]{\left\|#1\right\|}
+\newcommand{\Fnorm}[1]{\left\|#1\right\|_{\mathrm F}}
+\newcommand{\fnorm}[1]{\left\|#1\right\|_{\mathrm F}}
+\newcommand{\opnorm}[1]{\left\|#1\right\|_{\mathrm{op}}}
+\newcommand{\nnorm}[1]{\left\|#1\right\|_{*}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\pth}[1]{\left(#1\right)}
+\newcommand{\qth}[1]{\left[#1\right]}
+\newcommand{\sth}[1]{\left\{#1\right\}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\TV}{\mathrm{TV}}
+
+% Backwards-compatible alias for older notes.
+% Prefer \BetaDist in new documents to avoid overloading \Beta.
+\newcommand{\Beta}{\BetaDist}
+
+%----------Theorems----------
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+%----------Problem / Solution Environments----------
+
+\theoremstyle{definition} % Upright (Roman) body text
+\newtheorem{problem}{Problem}
+
+\newenvironment{solution}
+  {\renewcommand\qedsymbol{$\blacksquare$}\begin{proof}[Solution]}
+  {\end{proof}}
+
+\numberwithin{equation}{subsection}
+
+\endinput
