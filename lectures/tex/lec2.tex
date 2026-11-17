@@ -3,27 +3,27 @@
 \subsection*{Estimation of stationary time series}
 Let \(X_i\) be a stationary process. This means that
 \[(X_1, \dots, X_m) \ed (X_{l + 1}, \dots, X_{l + m})\]
-for all \(m \geq 1, l \geq 0\). Given \(X_1, \dots, X_n\), we want to estimate \(\mu = \E[X_i]\) and \(\gamma_k = \Cov(X_0, X_k)\). We can use \(\hat \mu_n = \overline X_n\) or \(\tilde \mu_n = \sum_{i=1}^n w_i X_i\) where the weights \(w_1, \dots, w_n\) are chosen to minimize \(\Var[\tilde \mu_n]\) subject to the unbiasedness constraint \(\sum_{i=1}^n w_i = 1\). However, the UMVUE estimator requires knowing \(\gamma_k\) in advance.
+for all \(m \geq 1, l \geq 0\). Given \(X_1, \dots, X_n\), we want to estimate \(\mu = \E[X_i]\) and \(\gamma_k = \Cov(X_0, X_k)\). We can use \(\wh \mu_n = \overline X_n\) or \(\wt \mu_n = \sum_{i=1}^n w_i X_i\) where the weights \(w_1, \dots, w_n\) are chosen to minimize \(\Var[\wt \mu_n]\) subject to the unbiasedness constraint \(\sum_{i=1}^n w_i = 1\). However, the UMVUE estimator requires knowing \(\gamma_k\) in advance.
 
 How can we estimate \(\gamma_0 = \Var[X_0]\)? If \(\E[X_0] = 0\), then consider \(X_i^2\) as a distinct process.
-\[\hat \gamma_0 = \frac{1}{n}\sum_{i=1}^n X_i^2\]
+\[\wh \gamma_0 = \frac{1}{n}\sum_{i=1}^n X_i^2\]
 If \(\E[X_0]\) is unknown, then
-\[\hat \gamma_0 = \frac{1}{n}\sum_{i=1}^n (X_i - \hat \mu)^2\]
+\[\wh \gamma_0 = \frac{1}{n}\sum_{i=1}^n (X_i - \wh \mu)^2\]
 In what follows, suppose \(\mu = 0\) is known. Then
-\[\hat \gamma_1 = \frac{X_1X_2 + \cdots + X_{n-1}X_n}{n}\]
+\[\wh \gamma_1 = \frac{X_1X_2 + \cdots + X_{n-1}X_n}{n}\]
 
-\[\hat \gamma_2 = \frac{X_1X_3 + \cdots + X_{n-2}X_n}{n}\]
+\[\wh \gamma_2 = \frac{X_1X_3 + \cdots + X_{n-2}X_n}{n}\]
 
-etc. up to \(\hat \gamma_{n-1}\). Why use \(\frac{1}{n}\) for the denominator? Consider
-\[\hat \Gamma_n = (\hat \gamma_{j-k})_{1 \leq j, k \leq n}\]
-Then we can write \(\hat \Gamma_n = \frac{1}{n}AA^\intercal\) as positive semidefinite, where
+etc. up to \(\wh \gamma_{n-1}\). Why use \(\frac{1}{n}\) for the denominator? Consider
+\[\wh \Gamma_n = (\wh \gamma_{j-k})_{1 \leq j, k \leq n}\]
+Then we can write \(\wh \Gamma_n = \frac{1}{n}AA^\intercal\) as positive semidefinite, where
 \[A = 
 \begin{bmatrix}
 X_1 & X_2 & \cdots & X_n & 0 & \cdots & 0 \\
 0 & X_1 & \cdots & X_{n-1} & X_n & \cdots & 0 \\
 0 & 0 & \cdots & X_1 & X_2 & \cdots & X_n
 \end{bmatrix}\]
-But \(\hat \Gamma_n\) is a bad estimate of the true truncated autocovariance matrix
+But \(\wh \Gamma_n\) is a bad estimate of the true truncated autocovariance matrix
 \[\Gamma_n =
 \begin{bmatrix}
 \gamma_0 & \gamma_1 & \cdots & \gamma_{n-1} \\
@@ -31,33 +31,33 @@ But \(\hat \Gamma_n\) is a bad estimate of the true truncated autocovariance mat
 \vdots & \vdots & \ddots & \vdots \\
 \gamma_{n-1} & \gamma_{n-2} & \cdots & \gamma_0
 \end{bmatrix}\]
-\textbf{Homework} Let \(\rho\) denote the operator norm. Design a simulation showing that consistency \(\rho(\hat \Gamma_n - \Gamma_n) \rightarrow 0\) fails in general.
+\textbf{Homework} Let \(\rho\) denote the operator norm. Design a simulation showing that consistency \(\rho(\wh \Gamma_n - \Gamma_n) \to 0\) fails in general.
 
-\textbf{Theorem} If \(X_i\) is stationary and ergodic, then \(\hat \mu_n - \mu \cas 0\) and \(\E |\hat \mu_n - \mu| \rightarrow 0\).
+\textbf{Theorem} If \(X_i\) is stationary and ergodic, then \(\wh \mu_n - \mu \cas 0\) and \(\E |\wh \mu_n - \mu| \to 0\).
 
 A measurable transformation of an ergodic process is ergodic. Thus, we have the following corollary:
 
-\textbf{Corollary} If \(\E[X_i^2] < \infty\) are iid, then \(\hat \gamma_k \cas \gamma_k\) and \(\E | \hat\gamma_k - \gamma_k | \rightarrow 0\) as \(n \rightarrow \infty\).
+\textbf{Corollary} If \(\E[X_i^2] < \infty\) are iid, then \(\wh \gamma_k \cas \gamma_k\) and \(\E | \wh\gamma_k - \gamma_k | \to 0\) as \(n \to \infty\).
 
 \textbf{CLT} If \(X_i\) are iid with \(\E[X_i] = \mu\) and \(\Var[X_i] = \sigma^2\), then
-\[\sqrt{n}(\hat\mu_n - \mu) \cd \N(0, \sigma^2)\]
+\[\sqrt{n}(\wh\mu_n - \mu) \cd \N(0, \sigma^2)\]
 Wht happens if \(X_i\) is stationary?
 
 \textbf{Short-range dependence}: \(\sum_{k=-\infty}^\infty |\gamma_k| < \infty\).
 
 Under short-range dependence, then
-\[\sqrt{n}(\hat \mu_n - \mu) \cd \N(0, \sigma^2_\infty), \qquad \sigma^2_\infty = \sum_{k=-\infty}^\infty \gamma_k\]
+\[\sqrt{n}(\wh \mu_n - \mu) \cd \N(0, \sigma^2_\infty), \qquad \sigma^2_\infty = \sum_{k=-\infty}^\infty \gamma_k\]
 We call \(\sigma^2_\infty\) the \emph{long-run variance}. What hapens if \(\beta \leq 1\) where \(\gamma_k = k^{-\beta}\)? Then \(\sigma^2_\infty = \infty\), yet
-\[a_n(\hat \mu_n - \mu) \cd \N(0, 1)\]
-for some normalizing sequence \(a_n\), or we could have \(a_n(\hat\mu_n - \mu)\) converging in distribution to a non-Gaussian limit. The simplest such case is called the Rosenblatt distribution.
+\[a_n(\wh \mu_n - \mu) \cd \N(0, 1)\]
+for some normalizing sequence \(a_n\), or we could have \(a_n(\wh\mu_n - \mu)\) converging in distribution to a non-Gaussian limit. The simplest such case is called the Rosenblatt distribution.
 
 The following calculation is key:
-\[\begin{gathered}n \Var[\hat \mu_n - \mu] = n \Var[\overline X_n] \\
+\[\begin{gathered}n \Var[\wh \mu_n - \mu] = n \Var[\overline X_n] \\
 = \frac{1}{n}\sum_{j,k} \gamma_{j-k} \\
 = \frac{1}{n}\sum_{l=1-n}^{n-1}(1 - |l|/n)\gamma_l \\
-\rightarrow \sum_{l=-\infty}^\infty \gamma_l\end{gathered}\]
+\to \sum_{l=-\infty}^\infty \gamma_l\end{gathered}\]
 This shows how the long-run variance crops up. Likewise,
-\[\sqrt{n}(\hat\gamma_k - \gamma_k) \rightarrow \N\left( 0, \sum_{l=-\infty}^\infty \Cov(X_l^2, X_{k+l}^2) \right)\]
+\[\sqrt{n}(\wh\gamma_k - \gamma_k) \to \N\left( 0, \sum_{l=-\infty}^\infty \Cov(X_l^2, X_{k+l}^2) \right)\]
 \textbf{Homework}: If \(X_i\) is a Gaussian process, then \(\Cov(X_0^2, X_k^2) = \Cov(X_0, X_k)^2\).
 
 All this discussion presumes that \(p = 1\). If \(p >> 1\), then we can say

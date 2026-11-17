@@ -6,10 +6,10 @@ Asusme that \(m(\theta) = \E[g(\theta, X_i)]\) is \(\mu\)-strongly convex and th
 \[\|g(\theta, X_i) - g(\theta', X_i)\|_p \leq L_p |\theta - \theta'|\]
 Then \(\theta_i(\gamma)\) converges to a stationary distribution \(\pi_\gamma\). We want to ascertain whether
 \[\frac{1}{\sqrt \gamma}\theta_\infty(\gamma) \Rightarrow \N(0, \Sigma)\]
-as \(\gamma \rightarrow 0\). A special case occurs when
+as \(\gamma \to 0\). A special case occurs when
 \[\begin{gathered}\theta_i^L = \theta_{i-1}^L - \gamma (\theta_{i-1}^L - X_i) \\
 = \gamma X_i + (1 - \gamma)\gamma X_{i-1} + (1 - \gamma)^2 \gamma X_{i-2} + \cdots\end{gathered}\]
-It\textquotesingle s easy to prove a CLT in this setting. We have
+It's easy to prove a CLT in this setting. We have
 \[\begin{gathered}\Var[\theta_i^L] = \gamma^2 \sigma^2 + (1 - \gamma)^2 \gamma^2 \sigma^2 + (1 - \gamma)^4 \gamma^2 \sigma^2 + \cdots \\
 = \frac{\gamma^2 \sigma^2}{1 - (1 - \gamma)^2} \\
 \approx \frac{\gamma \sigma^2}{2 - \gamma} \\
@@ -18,7 +18,7 @@ Thus,
 \[\frac{\theta_i^L}{\sqrt \gamma} \Rightarrow \N(0, \sigma^2/2)\]
 This follows immediately from the Lindeberg-Feller CLT. Next, we need to linearize to tackle the general case. We can rewrite as
 \[\theta_i = \theta_{i-1} - \gamma m(\theta_{i-1}) + \gamma [m(\theta_{i-1}) - g(\theta_{i-1}, X_i)]\]
-Next, recall Rio\textquotesingle s inequality: \(\|\theta_i\|_p^2 = O(\gamma)\). Then
+Next, recall Rio's inequality: \(\|\theta_i\|_p^2 = O(\gamma)\). Then
 \[= \theta_{i-1} - \gamma m(\theta_{i-1}) + \gamma[m(0) - g(0, X_i)] + \gamma D(\theta_{i-1}, X_i)\]
 Now,
 \[\|D(\theta_{i-1}, X_i)\|_p \leq 2\| L_p |\theta_{i-1} - 0|\|_p = 2L_p\|\theta_{i-1}\|_p\]
@@ -26,7 +26,7 @@ Call \(\eta_i := m(0) - g(0, X_i)\). Then
 \[\theta_i^\diamond = \theta_{i-1}^\diamond - \gamma m(\theta_{i-1}^\diamond) + \gamma \eta_i\]
 Note that \(\eta_i\) is an independent sequence. We call \(\theta_i^\diamond\) a nonlinear AR(1) process. Next,
 \[\|\theta_i - \theta_i^\diamond\|_p^2 = \|(\theta_{i-1} - \gamma m(\theta_{i-1})) + \gamma D(\theta_{i-1}, X_i) - (\theta_{i-1}^\diamond - \gamma m(\theta_{i-1}^\diamond))\|_p^2\]
-By Rio\textquotesingle s inequality,
+By Rio's inequality,
 \[\leq \| (\theta_{i-1} - \gamma m(\theta_{i-1})) - (\theta_{i-1}^\diamond - \gamma m(\theta_{i-1}^\diamond))\|_p^2 + (p - 1)\|\gamma D(\theta_{i-1}, X_i)\|_p^2\]
 Using convexity,
 \[\| (\theta_{i-1} - \gamma m(\theta_{i-1})) - (\theta_{i-1}^\diamond - \gamma m(\theta_{i-1}^\diamond))\|_p^2 \leq \|(1 - \gamma \kappa)(\theta_{i-1} - \theta_{i-1}^\diamond)\|_p^2\]
@@ -61,11 +61,11 @@ when \(2 < p < 4\). We can see this by breaking up into casework depending on wh
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 We can also prove a tail probability bound to control
-\[P(|\theta_i| \geq y)\]
+\[\Pr(|\theta_i| \geq y)\]
 We can use the \textbf{Nagaev inequality}. Suppose we have \(\xi_1, \xi_2, \dots\) independent and mean \(0\), and that \(p \geq 2\). Set
 \[\mu_{i,p} = \E[|\xi_i|^p]\]
 Then
-\[P(|\xi_1 + \cdots + \xi_n| \geq y) \leq C_1 \frac{\sum E[\xi_i|^p}{y^p} + C_2 \exp(-C_3 y^2 / \sum \E|\xi_i|^2)\]
+\[\Pr(|\xi_1 + \cdots + \xi_n| \geq y) \leq C_1 \frac{\sum \E|\xi_i|^p}{y^p} + C_2 \exp(-C_3 y^2 / \sum \E|\xi_i|^2)\]
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -83,18 +83,18 @@ For small \(\gamma\),
 \[(1 - \gamma_1) \cdots (1 - \gamma_k) \approx e^{-\gamma_1 - \cdots - \gamma_k} \approx e^{-c k^{1 - \alpha}}\]
 This shows convergence to \(0\) at a sub-exponential rate. Indeed, we can use this to prove
 \[\frac{\theta_n}{\sqrt \gamma_n} \Rightarrow \N(0, \Sigma)\]
-Thus, we call this a last-iterate CLT. In 1992, Polyak and Juditsky proved that averaging can improve that rate of performance. If
+Thus, we call this a last-iterate CLT. In 1992, \citet{PJ92} proved that averaging can improve that rate of performance. If
 \[\overline \theta_n = \frac{\theta_1 + \cdots + \theta_n}{n}, \qquad \|\overline \theta_n\| = O(1/\sqrt n)\]
 Then
-\[\sqrt n \hat \theta_n \Rightarrow \N(0, \Sigma)\]
+\[\sqrt n \wh \theta_n \Rightarrow \N(0, \Sigma)\]
 We call this ASGD (averagedd SGD).
 
 \textbf{Homework}: Let \(\theta_i = \theta_{i-1} - \gamma (\theta_{i-1} + X_i)\) where \(\gamma_i = C i^{-\alpha}\) where \(0 < \alpha < 1\). Then
 \[\overline \theta_n = \sum_{i=1}^n \omega_{n,i} X_i\]
 For some weights \(\omega_{n,i}\). Prove that \(\omega_{n,i} \approx 1/n\). Thus, we can approximate \(\overline \theta_n\) with \(\sum_{i=1}^n X_i\). In fact, show that
-\[\sum_{i=1}^n (\omega_{n,i} - 1/n)^2 \rightarrow 0\]
-as \(n \rightarrow \infty\). Furthermore, Ruppert in 1989 also introduced the technique of averaging in a technical report.
+\[\sum_{i=1}^n (\omega_{n,i} - 1/n)^2 \to 0\]
+as \(n \to \infty\). Furthermore, \citet{Rup88} also introduced the technique of averaging in a technical report.
 
 Following the introduction of ASGD, people proposed that more weight should be given to the later parameter values in the moving average definition of \(\overline \theta_n\). For example, an exponentially weighted moving average. In general, let us consider
 \[\sum_{i=1}^n \theta_i \omega_{n,i}, \qquad \sum_{i=1}^n \omega_{n,i}\]
-How can we optimally choose the weigts? There is a nice picture which shows this. Check the paper by Ziyang, Zhu, Wu (AISTATS 2026).
+How can we optimally choose the weights? There is a nice picture which shows this. Check the paper by \citet{WZW26}.

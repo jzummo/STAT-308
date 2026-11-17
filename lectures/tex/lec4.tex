@@ -7,7 +7,7 @@ We want to develop asymptotic theory for the time series \(X_t\).
 
 \textbf{Def.} An ergodic stationary causal process can be written as
 \[X_t = g(\epsilon_t, \epsilon_{t-1}, \dots)\]
-where \(\epsilon_t\) is iid. This representation is due to Wiener (1956). He proved that every stationary, ergodic process can be written in this form.
+where \(\epsilon_t\) is iid. This representation is due to \citet{Wie56}. He proved that every stationary, ergodic process can be written in this form.
 
 \textbf{Example 1.} \(X_t = \sum_{i=0}^\infty a_i \epsilon_{t-i}\) and \(\sum_{i=0}^\infty a_i^2 , \infty\). This is called a \emph{linear process}.
 
@@ -17,10 +17,10 @@ where \(\epsilon_t\) is iid. This representation is due to Wiener (1956). He pro
 
 \textbf{Example 4.} \(X_t = \rho |X_{t-1}| + \epsilon_t\). Then
 \[g(\epsilon_t, \epsilon_{t-1}, \dots) = \epsilon_t + | \rho \epsilon_{t-1} + |\rho \epsilon_{t-2} + \cdots||\]
-\textbf{Homework} Suppose \(\epsilon_t \sim N(0, 1)\). Show that the pdf of the above is skew-normal with density proportional to
+\textbf{Homework} Suppose \(\epsilon_t \sim \N(0, 1)\). Show that the pdf of the above is skew-normal with density proportional to
 \[c \phi(x)\Phi(\delta x), \quad \delta = \frac{\rho}{\sqrt{1 - \rho^2}}\]
 
-\subsection*{Wiener\textquotesingle s Proof}
+\subsection*{Wiener's Proof}
 Let \(\mathcal F_t = \sigma(X_t, X_{t-1}, \dots).\)
 \[[X_t \mid \mathcal F_{t-1}] \overset{d}{=} Q(U_t, \mathcal F_{t-1})\]
 where \(Q\) is the conditional quantile function. Recall that a joint distribution \((X, Y)\) can be written as
@@ -47,13 +47,13 @@ X_t \\
 X_{t-1}
 \end{bmatrix}, \qquad Y_t = F(Y_{t-1}, \epsilon_t).\]
 We can also call this a nonlinear AR process. We can also write this as
-\[X_t = F_{\epsilon_t}(X_{t-1}), \qquad F_{\epsilon_t}: \R \rightarrow \R\]
+\[X_t = F_{\epsilon_t}(X_{t-1}), \qquad F_{\epsilon_t}: \R \to \R\]
 as a system of iterated random functions. This is a simplification of the generic case. We can ask: under what conditions does this sequence of functions converge?
 
 \textbf{Example 5.}
 \[X_t = \epsilon_t \sqrt{a^2 + b^2 X_{t-1}^2}, \qquad a, b \in \R.\]
-This is called *ARCH(1). The examples above have constant conditional variance (i.e. \(\text{Var}[X_t \mid \mathcal{F}_{t-1}]\)), but this model does not:
-\[Var[X_t \mid X_{t-1} = x] = a^2 + b^2 x^2\]
+This is called ARCH(1). The examples above have constant conditional variance (i.e. \(\Var[X_t \mid \mathcal{F}_{t-1}]\)), but this model does not:
+\[\Var[X_t \mid X_{t-1} = x] = a^2 + b^2 x^2\]
 This idea, due to Engle, explains volatility clustering well.
 
 \textbf{Example 6.}
@@ -76,13 +76,13 @@ This is akin to an AR(1) process, with a random coefficient -\/- a \emph{random 
 
 \textbf{Question}: For Markov processes, can we find a distribution \(\pi\) such that \(X_t \Rightarrow \pi\)? This is slightly more general than stationarity.
 
-Let\textquotesingle s revisit an old example. If
+Let's revisit an old example. If
 \[X_t = \rho X_{t-1} + \epsilon_t, \qquad F(x, \epsilon) = \rho x + \epsilon\]
 Then we have convergence to stationarity if \(|\rho| < 1\). This motivates the general case: the map \(F(\cdot, \epsilon)\) should contract (on average?)
 
 \textbf{Example 9.}
 
-Consider \(X_t = F(X_{t-1})\). The Banach fixed-point theorem asserts that \(X_t \rightarrow x^*\) if \(F\) is a contraction mapping: \(\sup_x |F'(x)| < 1\).
+Consider \(X_t = F(X_{t-1})\). The Banach fixed-point theorem asserts that \(X_t \to x^*\) if \(F\) is a contraction mapping: \(\sup_x |F'(x)| < 1\).
 
 However, we cannot have a fixed point in the random case because the map \(F(\cdot, \epsilon_t)\) changes with the random noise. We move from considering fixed points to considering fixed distributions: \(F(\pi) = \pi\).
 

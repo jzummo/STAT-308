@@ -2,8 +2,8 @@
 
 \subsection*{Structure of stationary time series}
 Recall the covariance estimate is given by
-\[\hat\gamma_k = \frac{1}{n}\sum_{i=k+1}^n (X_i - \overline{X})(X_{i-k} - \overline{X})\]
-Then \(\hat \Gamma_n\) is positive semidefinite but not consistent.
+\[\wh\gamma_k = \frac{1}{n}\sum_{i=k+1}^n (X_i - \overline{X})(X_{i-k} - \overline{X})\]
+Then \(\wh \Gamma_n\) is positive semidefinite but not consistent.
 
 \subsection*{Covariance Structure}
 Let \(\Gamma_n\) be the true covariance matrix: \(\Gamma_n = (\gamma_{j-k})_{1 \leq j, k \leq n}\). \(\Gamma_n\) is positive semidefinite and Toeplitz:
@@ -24,18 +24,18 @@ Let \(\mathbf{x} = (\cdots -1, 1, -1, \dots)\). Then
 \[\Gamma \mathbf{x} = \left(\sum_{k=-\infty}^\infty (-1)^k \gamma_k\right) \mathbf{x} = f(\pi)\mathbf{x}\]
 \textbf{Homework}: Verify the connection between spectral density and eigenvalues above via simulation. Set \(n = 1000\) and use an AR(1) process.
 
-How to estimate \(\Gamma_n\) consistently? It can be shown that, \(\rho(\hat \Gamma_n - \Gamma_n) \asymp \log n\), so consistency fails. If \(k\) is large, then \(\hat \gamma_k\) is a bad estimate of \(\gamma_k\) because of limited data. Yet \(\sqrt{n}(\hat \gamma_k - \E[\hat\gamma_k]) \cd \N(0, \sigma_k^2)\). For large \(k\), instead we should estimate \(\tilde \gamma_k \equiv 0\). The MSE is
-\[\text{MSE}(\tilde\gamma_k) = (0 - \gamma_k)^2 = \gamma_k^2 = \rho^{2k}\]
+How to estimate \(\Gamma_n\) consistently? It can be shown that, \(\rho(\wh \Gamma_n - \Gamma_n) \asymp \log n\), so consistency fails. If \(k\) is large, then \(\wh \gamma_k\) is a bad estimate of \(\gamma_k\) because of limited data. Yet \(\sqrt{n}(\wh \gamma_k - \E[\wh\gamma_k]) \cd \N(0, \sigma_k^2)\). For large \(k\), instead we should estimate \(\wt \gamma_k \equiv 0\). The MSE is
+\[\text{MSE}(\wt\gamma_k) = (0 - \gamma_k)^2 = \gamma_k^2 = \rho^{2k}\]
 For an AR(1) process \(X_i = \rho X_{i-1} + \epsilon_i\), we have \(\gamma_k \approx \rho^k\). Then
-\[\text{MSE}(\hat \gamma_k) = \Var[\hat\gamma_k] + \text{bias}^2\]
-If \(k \geq \rho \log n\), then \(\tilde \gamma_k\) is a better estimator (in terms of MSE) than \(\hat \gamma_k\). Set
-\[\tilde \Gamma_n = (\hat\gamma_{j-h}\one[|j - h| \leq k])\]
+\[\text{MSE}(\wh \gamma_k) = \Var[\wh\gamma_k] + \text{bias}^2\]
+If \(k \geq \rho \log n\), then \(\wt \gamma_k\) is a better estimator (in terms of MSE) than \(\wh \gamma_k\). Set
+\[\wt \Gamma_n = (\wh\gamma_{j-h}\one[|j - h| \leq k])\]
 Where \(k = \rho \log n\).
 
-\textbf{Homework}: Show that \(\rho(\tilde \Gamma_n - \Gamma_n) \rightarrow 0\).
+\textbf{Homework}: Show that \(\rho(\wt \Gamma_n - \Gamma_n) \to 0\).
 
 We can use other kernelized covariance estimators:
-\[\Gamma_n^w = (\hat \gamma_{j-k} w_{j-k})_{1 \leq j, k \leq n}\]
+\[\Gamma_n^w = (\wh \gamma_{j-k} w_{j-k})_{1 \leq j, k \leq n}\]
 where \(w\) is variously a box kernel, triangular kernel, Gaussian kernel, Epanechnikov kernel, etc. We can write these estimate as
 \[\Gamma_n^w = \Gamma_n \odot W,\]
 where the martrix \(W\) is determined by our choice of kernel.
@@ -58,18 +58,18 @@ So \(\Cov[Z] = A \odot B\).
 Let \(\gamma_h = \Cov[X_0, X_h]\). To test the null
 \[H_0: \gamma_1 = \gamma_2 = \cdots = 0\]
 we should intuit using the test statistic
-\[\hat \gamma_1^2 + \cdots + \gamma_k^2\]
+\[\wh \gamma_1^2 + \cdots + \gamma_k^2\]
 \textbf{Box-Pierce}:
 
-With \(\hat\rho_k\) the sample act, reject \(H_0\) if
-\[n(\hat \rho_1^2 + \cdots + \hat \rho_L^2) \geq \chi^2_L(1 - \alpha).\]
-\textbf{Homework}: Suppose \(X_i \iid \N(0, 1)\). Then \(\sqrt{n}\hat \rho_k \Rightarrow \N(0, 1)\) also asymptotically independently in \(k\).
+With \(\wh\rho_k\) the sample act, reject \(H_0\) if
+\[n(\wh \rho_1^2 + \cdots + \wh \rho_L^2) \geq \chi^2_L(1 - \alpha).\]
+\textbf{Homework}: Suppose \(X_i \iid \N(0, 1)\). Then \(\sqrt{n}\wh \rho_k \Rightarrow \N(0, 1)\) also asymptotically independently in \(k\).
 
-\textbf{Ljung-Box}: Use the test statistic \(n(n + 2)\sum_{i=1}^L \frac{\hat \rho_i^2}{n - i}\).
+\textbf{Ljung-Box}: Use the test statistic \(n(n + 2)\sum_{i=1}^L \frac{\wh \rho_i^2}{n - i}\).
 
 1996 Romano Thombs:
 
 Let \(X_i = \epsilon_i \epsilon_{i-1}\) where \(\epsilon_i \iid \N(0, 1)\). Then \(\gamma_0 = 1\) and
 \[\gamma_1 = \E[\epsilon_i\epsilon_{i-1}^2\epsilon_{i-2}] = 0.\]
 \textbf{Homework}:
-\[\sqrt{n}(\hat \gamma_1 - \gamma) \Rightarrow \N(0, \sigma^2), \quad \sigma^2 \neq 1.\]
+\[\sqrt{n}(\wh \gamma_1 - \gamma) \Rightarrow \N(0, \sigma^2), \quad \sigma^2 \neq 1.\]

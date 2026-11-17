@@ -4,10 +4,10 @@
 
 \(X_t\) a stationary process
 
-Predict \(X_{n+1}\) based on \(X_n, \dots, X_1\). Let \(\mu = E[X_{n+1}]\) and \(\hat \mu_n = \frac{X_1 + \cdots + X_n}{n}\). Assume \(\mu = 0\). For linear prediction, we want to find \(a_1, \dots, a_n\) such that
-\[\hat X_{n+1} = a_1 X_1 + \cdots + a_n X_n\]
+Predict \(X_{n+1}\) based on \(X_n, \dots, X_1\). Let \(\mu = \E[X_{n+1}]\) and \(\wh \mu_n = \frac{X_1 + \cdots + X_n}{n}\). Assume \(\mu = 0\). For linear prediction, we want to find \(a_1, \dots, a_n\) such that
+\[\wh X_{n+1} = a_1 X_1 + \cdots + a_n X_n\]
 in order to minimize the mean-square error
-\[E[(X_{n+1} - (\sum_i a_i X_i))^2]\]
+\[\E[(X_{n+1} - (\sum_i a_i X_i))^2]\]
 Orthogonality gives the Wiener-Hopf equations, or normal equations:
 \[\Gamma_n
 \begin{pmatrix}
@@ -25,24 +25,24 @@ The prediction error is decreasing in \(n\). In the limit as \(n\) increases, th
 \[\exp\left(\tfrac{1}{2\pi} \int_0^{2\pi} \log f(\theta)d\theta\right)\]
 where
 \[f(\theta) = \frac{1}{2\pi} \sum_{j=-\infty}^\infty \gamma_j e^{-j\theta}\]
-is the spectral density function. This is called the Szego formula. Historically, one-dimensional prediction was developed by Kolmogorov and Wiener during the 1940s. Their theory does not acccount for error in estimating \(\Gamma_n\) however, which is where we now focus our attention.
+is the spectral density function. This is called the Szeg\H{o} formula. Historically, one-dimensional prediction was developed by Kolmogorov and Wiener during the 1940s. Their theory does not account for error in estimating \(\Gamma_n\) however, which is where we now focus our attention.
 
-Let \(\rho\) denote the operator norm. As we\textquotesingle ve seen previously,
-\[\rho(\hat \Gamma_n - \Gamma_n) \asymp \log n\]
+Let \(\rho\) denote the operator norm. As we've seen previously,
+\[\rho(\wh \Gamma_n - \Gamma_n) \asymp \log n\]
 Why \(\log n\)? Consider the case where \(X_i \iid \N(0, 1)\). Define
-\[\begin{gathered}\hat I_n(\theta) = \frac{1}{n} \left| \sum_{j=1}^n X_j e^{ij\theta} \right|^2 \\
-= \frac{1}{n} \sum_{k=1-n}^{n-1} \hat \gamma_k e^{ik\theta}\end{gathered}\]
-In this example, \(\Gamma_n = I_n\) and \(\rho(\Gamma_n) = 1\). What is \(\rho(\hat \Gamma_n)\)? Last time, we mentioned that the eigenvalues of a Toeplitz matrix are the image of its Fourier transform. Similarly,
-\[\rho(\hat \Gamma_n) \asymp \max_\theta I_n(\theta)\]
-Observe that \(I_n(\theta)\) is \(\chi^2_2\) distributed, which is also the \(\Exp(1/2)\) distribution. At \(\theta_j = \frac{j 2 \pi }{n}\), \(I_n(\theta_j)\) are uncorrelated and thus independent. Then we can do the probability theory to find the result. For further extensions, check Liu, Lin 2009 Annals of Statistics, and Peligrad and Wu 2011in Annals of Probability. Also check Turkman.
+\[\begin{gathered}\wh I_n(\theta) = \frac{1}{n} \left| \sum_{j=1}^n X_j e^{ij\theta} \right|^2 \\
+= \frac{1}{n} \sum_{k=1-n}^{n-1} \wh \gamma_k e^{ik\theta}\end{gathered}\]
+In this example, \(\Gamma_n = I_n\) and \(\rho(\Gamma_n) = 1\). What is \(\rho(\wh \Gamma_n)\)? Last time, we mentioned that the eigenvalues of a Toeplitz matrix are the image of its Fourier transform. Similarly,
+\[\rho(\wh \Gamma_n) \asymp \max_\theta I_n(\theta)\]
+Observe that \(I_n(\theta)\) is \(\chi^2_2\) distributed, which is also the \(\Exp(1/2)\) distribution. At \(\theta_j = \frac{j 2 \pi }{n}\), \(I_n(\theta_j)\) are uncorrelated and thus independent. Then we can do the probability theory to find the result. For further extensions, check \citet{LL09} (Annals of Statistics), and \citet{PW10} (Annals of Probability). Also check Turkman.
 
 How can we estimate the covariance matrix consistently? We can use the kernelized estimator:
-\[\hat \gamma_{j-k} \one[|j - k| \leq B]\]
-However, this is not necessarily positive semidefinite. If we use a different kernel (e.g. triangular), then we do have consistency. Yet we\textquotesingle ll prove the theorem for the rectangular kernel case.
+\[\wh \gamma_{j-k} \one[|j - k| \leq B]\]
+However, this is not necessarily positive semidefinite. If we use a different kernel (e.g. triangular), then we do have consistency. Yet we'll prove the theorem for the rectangular kernel case.
 
-\textbf{Thm} Suppose \(B \rightarrow \infty\) and \(B/\sqrt n \rightarrow \infty\). Then the kernelized estimator is consistent.
+\textbf{Thm} Suppose \(B \to \infty\) and \(B/\sqrt n \to \infty\). Then the kernelized estimator is consistent.
 
-\textbf{Remark} It suffices to assume \(B \rightarrow \infty\) and \(B/n \rightarrow 0\). However, this proof is significantly more involved. See Wu AoS 2012.
+\textbf{Remark} It suffices to assume \(B \to \infty\) and \(B/n \to 0\). However, this proof is significantly more involved. See \citet{XW12}.
 
 \textbf{Proof} See homework
 
@@ -50,12 +50,12 @@ In particular, if \(\sum_{\ell = 1 + B}^\infty |\gamma_\ell| = O(B^{-\alpha})\) 
 \[\frac{B}{\sqrt n} = B^{-\alpha} \iff B = n^{-2(1 + \alpha)}\]
 In particular, if \(\alpha\) is large, then we should choose a small \(B\), accounting for the rapid decay. Also, if \(\sum_{\ell = 1 + B}^\infty |\gamma_\ell| = O(e^{-B})\), then we should choose \(B = c \log n\) as the optimal bandwidth. The resulting error (in the operator norm) becomes \(\frac{\log n}{\sqrt n}\), which almost matches the parametric rate.
 
-Once we\textquotesingle ve estiamted the optimal weights, we solve the prediction problem via
-\[\hat \Gamma_{n,B}^{-1}
+Once we've estimated the optimal weights, we solve the prediction problem via
+\[\wh \Gamma_{n,B}^{-1}
 \begin{pmatrix}
-\hat \gamma_1 \\
+\wh \gamma_1 \\
 \vdots \\
-\hat \gamma_B \\
+\wh \gamma_B \\
 0 \\
 \vdots \\
 0
@@ -64,7 +64,7 @@ Once we\textquotesingle ve estiamted the optimal weights, we solve the predictio
 
 We denote these quantities via \(\text{Cum}(X_i, X_j, X_k)\). These let us study non-Gaussian behavior of time series. For simplicity, assume \(\E X_i = 0\). We can estimate \(\text{Cum}(X_i, X_j, X_k)\) via
 \[\frac{1}{n} \sum_\ell X_{i + \ell} X_{j + \ell} X_{k + \ell}\]
-We can get a CLT for this cumulant estimate by computing the physical dependence measure. This is easy with a triangle inequality approach, and we can even generalize this technique to higher order cumulants. Danna Zhang and Wu wrote a paper on the theory of cumulants in IEEE in 2018.
+We can get a CLT for this cumulant estimate by computing the physical dependence measure. This is easy with a triangle inequality approach, and we can even generalize this technique to higher order cumulants. \citet{ZW18} wrote a paper on the theory of cumulants in IEEE in 2018.
 
 If \(X_t\) is a linear process, we can get a closed-form formula for the cumulants. This is called the Bartlett formula.
 
@@ -75,9 +75,9 @@ If \(X_t\) is a linear process, we can get a closed-form formula for the cumulan
 Suppose we have \(X_t \in \R^p\) with \(\E[X_t] = 0\). Let \(\Sigma = \Cov[X_t]\). Given data \(X_1, \dots, X_n\), how can we estimate \(\Sigma\) and \(\Sigma^{-1}\)?
 
 We can estimate \(\Sigma\) via
-\[\hat \Sigma_n = \frac{1}{n}\sum_{t=1}^n X_t X_t^\intercal\]
-However, we run into trouble with this estimator in high dimensions. For example, when \(X_t \iid \N(0, 1)\). Then \(\rho(\hat \Sigma_n) \rightarrow 4\).
+\[\wh \Sigma_n = \frac{1}{n}\sum_{t=1}^n X_t X_t^\intercal\]
+However, we run into trouble with this estimator in high dimensions. For example, when \(X_t \iid \N(0, 1)\). Then \(\rho(\wh \Sigma_n) \to 4\).
 
 \textbf{Homework}: Prove this.
 
-Thus, \(\rho(\hat \Sigma_n - \Sigma) \rightarrow 3\) and the naive estimate is inconcsistent. Wu and Pourahdmi (2003) and Bickel and Levinson (2008) provide assumptions that let us estimate the covariance matrix consistently in high dimensions.
+Thus, \(\rho(\wh \Sigma_n - \Sigma) \to 3\) and the naive estimate is inconsistent. \citet{WP03} and \citet{BL08a} provide assumptions that let us estimate the covariance matrix consistently in high dimensions.

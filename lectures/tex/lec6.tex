@@ -2,8 +2,8 @@
 
 \textbf{Remark}: If \(\frac{d}{dx} F(x, \epsilon)\) exists, then the stochastic Lipschitz condition is equivalent to the derivative condition. Why is this?
 
-Suppose the Lipschitz condition holds. By Fatou\textquotesingle s Lemma,
-\[\liminf_{x' \rightarrow x} E \frac{|F_\epsilon(x') - F_\epsilon(x')|}{|x - x'|} \geq E \liminf_{x' \rightarrow x} \frac{|F_\epsilon(x') - F_\epsilon(x')|}{|x - x'|}\]
+Suppose the Lipschitz condition holds. By Fatou's Lemma,
+\[\liminf_{x' \to x} E \frac{|F_\epsilon(x') - F_\epsilon(x')|}{|x - x'|} \geq E \liminf_{x' \to x} \frac{|F_\epsilon(x') - F_\epsilon(x')|}{|x - x'|}\]
 For the reverse direction, we can use the integral form of the mean-value theorem:
 \[\begin{gathered}|F(x, \epsilon) - F(x', \epsilon)| = \int_x^{x'} E \left| \frac{d}{dt} F(t, \epsilon) \right| dt \\
 \leq \int_{x'}^x \rho \\
@@ -60,11 +60,11 @@ How can we close the gap between this gap that arises in the vector case, streng
 = \frac{|A^2 y - A^2 y'|}{|y - y'|}\end{gathered}\]
 So we need to impose that \(|A^2|_2 < 1\) in order to assert GMC.
 
-\textbf{Gelfand\textquotesingle s Theorem}: For any matrix \(A\),
-\[\lim_{n \rightarrow \infty} |A^n|_2^{1/n} = \rho(A)\]
+\textbf{Gelfand's Theorem}: For any matrix \(A\),
+\[\lim_{n \to \infty} |A^n|_2^{1/n} = \rho(A)\]
 and this limiting sequence is monotonically decreasing. This lets us connect the spectral radius theory with the operator norm condition: if \(\rho(A) < 1\), then there exists \(m\) such that \(|A^m|_2 < 1\). Thus, we have
 \[\rho_m = \sup_{x \neq x'} \frac{F_{\epsilon_n} \circ \cdots \circ F_{\epsilon_{n-m}}(x) - F_{\epsilon_n} \circ \cdots \circ F_{\epsilon_{n-m}}(x')}{|x - x'|}\]
-So \(\frac{\log \rho_m}{m} \rightarrow \log \rho(A)\). This is the \emph{Lyapunov exponent} of this dynamical system. How can we estimate \(\rho(A)\) based on data? Or Goldreich is working on this.
+So \(\frac{\log \rho_m}{m} \to \log \rho(A)\). This is the \emph{Lyapunov exponent} of this dynamical system. How can we estimate \(\rho(A)\) based on data? Or Goldreich is working on this.
 
 \subsection*{Stochastic Gradient Descent}
 We have data \(X_1, \dots, X_n\) and a parameter \(\theta\). We want to perform MLE:
@@ -73,7 +73,7 @@ Or equivalently
 \[\min_\theta \sum_{i=1}^n -\log \ell(\theta, x_i) = \min_\theta f_n(\theta)\]
 For modern applications (language modeling training), the sample size \(n\) is extremely large (in the trillions). We could try running gradient descent
 \[\theta_j = \theta_{j-1} - \gamma f'(\theta_{j-1})\]
-One iteration of gradient descent requires \(O(n)\) computations, competely intractable. Robbins and Monro proposed a separate approach: instead, update with
+One iteration of gradient descent requires \(O(n)\) computations, competely intractable. \citet{RM51} proposed a separate approach: instead, update with
 \[\theta_j = \theta_{j-1} - \gamma_j g(\theta_{j-1}, X_j)\]
 reducing the update per step to \(O(1)\).
 
@@ -83,8 +83,8 @@ The above update gives us a Markov chain: define
 \[F(\theta, x) = \theta - \gamma g(\theta, x)\]
 and apply theory from iterated random functions.
 \[\begin{gathered}E |F(\theta, x) - F(\theta', x)|^2 \\
-= (\theta - \theta')^2 - 2\gamma(\theta - \theta')E[g(\theta, x) - g(\theta', x)] + \gamma^2 E[g(\theta, x) - g(\theta', x)]\end{gathered}\]
-Define the mean function \(m(\theta) = E[g(\theta, x)\){]}. Assume that
+= (\theta - \theta')^2 - 2\gamma(\theta - \theta')\E[g(\theta, x) - g(\theta', x)] + \gamma^2 \E[g(\theta, x) - g(\theta', x)]\end{gathered}\]
+Define the mean function \(m(\theta) = \E[g(\theta, x)\){]}. Assume that
 \[(\theta - \theta')(m(\theta) - m(\theta')) \geq \mu|\theta - \theta')\]
 which is \(\mu\)-strong convexity. Next, assume
 \[E |g(\theta, X) - g(\theta', X)|^2 \leq L^2 |\theta - \theta'|\]

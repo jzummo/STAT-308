@@ -6,7 +6,7 @@ or
 \[\sum \|X_i - X_i^*\| < \infty\]
 then
 \[\frac{S_n}{\sqrt n} \Rightarrow \N(0, \sigma^2_\infty).\]
-Today we\textquotesingle ll see the CLT for SGD estimates. Recall the setting
+Today we'll see the CLT for SGD estimates. Recall the setting
 \[\theta_i = \theta_{i-1} - \gamma g(\theta_{i-1}, X_i)\]
 where \(X_i\) is iid. Here, \(\gamma > 0\) is the learning rate. Define \(m(\theta) = \E[g(\theta, X_1)]\). The conditions we require are
 
@@ -22,15 +22,15 @@ Let \(F_{X_i}^\gamma\) be the transition map. We derived the following geometric
 \[\|F_{X_i}(\theta) - F_{X_i}(\theta')\|_p \leq (1 - \gamma \kappa)|\theta - \theta'|\]
 The derivation is easy to do for the case where \(p = 2\).
 
-\textbf{Rio\textquotesingle s inequality}: for \(p \geq 2\) and random variables \(V, W\) satisfying \(\E[V \mid W] = 0\), we have
+\textbf{Rio's inequality}: for \(p \geq 2\) and random variables \(V, W\) satisfying \(\E[V \mid W] = 0\), we have
 \[\|W + V\|_p^2 \leq \|W\|_p^2 + (p - 1)\|V\|_p^2\]
 As a consequence, for a martingale difference sequence \(D_i\),
 \[\|D_1 + \cdots + D_n\|_p^2 \leq (p - 1)\sum_{i=1}^n \|D_i\|_p^2\]
 This is related to the Burkholder-Davis-Grundy inequality.
 
-To prove GMC for \(p \geq 2\), we can use Rio\textquotesingle s inequality in conjunction with the assumptions
+To prove GMC for \(p \geq 2\), we can use Rio's inequality in conjunction with the assumptions
 \[\theta - \gamma g(\theta, X) = \theta - \gamma m(\theta) + \gamma (m(\theta) - g(\theta, X))\]
-Note that \(\E[m(\theta) - g(\theta, X) \mid \theta] = 0\) by definition of the expectation. Applying Rio\textquotesingle s inequality,
+Note that \(\E[m(\theta) - g(\theta, X) \mid \theta] = 0\) by definition of the expectation. Applying Rio's inequality,
 \[\|\theta - \gamma g(\theta, X) - \theta' + \gamma g(\theta', X)\|_p^2 \leq \cdots\]
 \textbf{TODO FINISH} using the assumptions and the \(p = 2\) case,
 \[\leq |(1 - \gamma \kappa)(\theta - \theta')|^2 + (p - 1)\gamma^2(2L_p(\theta - \theta'))^2\]
@@ -42,26 +42,26 @@ This is related to algorithmic stability:
 \[\theta_n = F_n(X_n, \dots X_1), \qquad \theta_n' = F_n(X_n, \dots, X_1')\]
 Then
 \[\|\theta_n - \theta_n'\|_p^2 \leq (1 - \gamma C)^n \|X_i - X_i'\|_p^2\]
-Is this the end of the story? In practice, \(\gamma\) is chosen to be very small. For example, \(\gamma = n^{-5/12}\) is common. In this setting where \(\gamma \rightarrow 0\) but \(n \gamma \rightarrow \infty\), the above CLT does not apply.
+Is this the end of the story? In practice, \(\gamma\) is chosen to be very small. For example, \(\gamma = n^{-5/12}\) is common. In this setting where \(\gamma \to 0\) but \(n \gamma \to \infty\), the above CLT does not apply.
 
 Performance of SGD with small \(\gamma\):
 \[\rho^i \approx (1 - \gamma C)^i,\]
 we need \(i >> 1/\gamma\) to achieve a diminishing rate. The isuse is that when \(i\) is small, \(\theta_i\) is heavily autocorrelated.
 
-Suppose \(\theta^* = 0\) so that \(m(\theta^*) = 0\). Then \(\theta_n\) is a distribution which is non-degenerate in general. Only when \(\gamma \rightarrow 0\) can \(\theta_\infty\) concentrate on \(0\), the true parameter of interest. Let \(\theta_\infty(\gamma)\) denote the limiting marginal distribution.
+Suppose \(\theta^* = 0\) so that \(m(\theta^*) = 0\). Then \(\theta_n\) is a distribution which is non-degenerate in general. Only when \(\gamma \to 0\) can \(\theta_\infty\) concentrate on \(0\), the true parameter of interest. Let \(\theta_\infty(\gamma)\) denote the limiting marginal distribution.
 
 \textbf{Theorem}: under suitable conditions,
 \[\E[\theta_\infty(\gamma)] = \theta^* + A_1 \gamma + A_2 \gamma^2 + O(\gamma^{2.5}).\]
 For fixed \(\gamma\), we can estimate
-\[\hat \theta_\infty(\gamma) = \frac{\theta_1 + \cdots + \theta_n}{n}\]
+\[\wh \theta_\infty(\gamma) = \frac{\theta_1 + \cdots + \theta_n}{n}\]
 How can we estimate \(\theta^*\) then? We can use
-\[\begin{gathered}2\hat\theta_\infty(\gamma) - \hat\theta_\infty(2\gamma) \\
+\[\begin{gathered}2\wh\theta_\infty(\gamma) - \wh\theta_\infty(2\gamma) \\
 = 2(\theta^* + A_1 \gamma + A_2 \gamma^2 + O(\gamma^{2.5})) - (\theta^* + 2A_1 \gamma + 4A_2 \gamma^2 + O(\gamma^{2.5})) \\
 = \theta^* - 2A_2 \gamma^2 + O(\gamma^{2.5})\end{gathered}\]
 In numerical analysis, this is called Richardson-Romberg extrapolation. In statistics, we call this jackknife estimation.
 
-Next, we\textquotesingle ll discuss a CLT for the limiting regime \(\gamma \rightarrow 0\). It turns out that
-\[\frac{\theta_\infty(\gamma) - \theta^*}{\sqrt \gamma} \Rightarrow \N(0, \Gamma), \quad \text{ as } \gamma \rightarrow 0.\]
+Next, we'll discuss a CLT for the limiting regime \(\gamma \to 0\). It turns out that
+\[\frac{\theta_\infty(\gamma) - \theta^*}{\sqrt \gamma} \Rightarrow \N(0, \Gamma), \quad \text{ as } \gamma \to 0.\]
 \textbf{Proof}
 Assume \(\theta^* = 0\) as usual. Then
 \[\begin{gathered}\E[\theta_i^2] = \E[\theta_{i-1}^2 - 2\gamma g(\theta_{i-1}, X_i)\theta_{i-1} + \gamma^2 g^2(\theta_{i-1}, X_i)] \\
@@ -87,18 +87,17 @@ How do we prove a CLT for this? Since the terms in the infinite summation are no
 Assume
 
 \begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \(\max_{k \leq k_n} \sigma^2_{nk} \rightarrow 0\)
+  \(\max_{k \leq k_n} \sigma^2_{nk} \to 0\)
 \item
-  \(\sum_{k=1}^{k_n} W_{nk}^2 \one[|W_{nk} > \epsilon] \rightarrow 0\) as \(n \rightarrow 0\) for all \(\epsilon > 0\).
+  \(\sum_{k=1}^{k_n} W_{nk}^2 \one[|W_{nk} > \epsilon] \to 0\) as \(n \to 0\) for all \(\epsilon > 0\).
 \end{enumerate}
 
 Then Lindeberg-Feller gives us the CLT.
 
 In our setting, we are dealing with
 \[\sum_{i=-\infty}^\infty \eta_i c_{i\gamma}, \quad \sum_{i=-\infty}^\infty c_{i\gamma}^2 = 1\]
-Now it\textquotesingle s easy to verify the conditions of the Lindeberg-Feller theorem.
+Now it's easy to verify the conditions of the Lindeberg-Feller theorem.
 
 An interesting tidbit: Lindeberg says that 1. and 2. imply the CLT, and Feller says that 1. and CLT imply 2. Wu recently proved that CLT + \(\eta_i\) non-normal implies 1. However, if \(\eta_i\) is not normal, then 1. is not needed.

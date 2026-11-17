@@ -1,6 +1,6 @@
 \section{Lecture 15}
 
-\textbf{Dantzig\textquotesingle s Method of Covariance Estimation}
+\textbf{Dantzig's Method of Covariance Estimation}
 \[\min |\Omega|_1 \st \|\Sigma_n \Omega - I||_\infty \leq \lambda\]
 Note that we cannot use the alternate constraint \(\|\Sigma_n - \Omega^{-1}\|_\infty \leq \lambda\) because of the comptuational difficulty of inverting a high-dimensional matrix.
 
@@ -12,16 +12,16 @@ Note that we cannot use the alternate constraint \(\|\Sigma_n - \Omega^{-1}\|_\i
 Thus,
 \[\Gamma = A \Gamma_0\]
 where \(\Gamma_\ell\) is the lag \(\ell\) autocovariance matrix. We can then estimate \(A\) via
-\[\min |A|_1 \st \|\hat\Gamma_1 - A \hat \Gamma_0\|_\infty \leq \lambda\]
-This results in a sparse VAR matrix \(A\). This is useful for applications because it allows us to restrict our scientific interpretation to the smaller number of non-zero coefficients. Wu, Wu (2016) EJS analyze the asymptomatic properties of this estimator.
+\[\min |A|_1 \st \|\wh\Gamma_1 - A \wh \Gamma_0\|_\infty \leq \lambda\]
+This results in a sparse VAR matrix \(A\). This is useful for applications because it allows us to restrict our scientific interpretation to the smaller number of non-zero coefficients. \citet{WW16} analyze the asymptotic properties of this estimator.
 
 Back to Dantzig: we can split this up into sub-problems. Let \(\omega_j\) denote the \(j\)th column of \(\Omega\). Then the optimization problem splits into
 \[\min |\omega_j|_1 \st |\Sigma_n \omega_j - e_j|_\infty \leq \lambda\]
-For \(j = 1, \dots, p\). Then we let \(\hat \Omega\) be the symmetrization of \([\hat \omega_1, \dots, \hat \omega_p]\).
+For \(j = 1, \dots, p\). Then we let \(\wh \Omega\) be the symmetrization of \([\wh \omega_1, \dots, \wh \omega_p]\).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-\textbf{Asymptotic theory for \(\hat \omega_1 := \hat \omega\)}:
+\textbf{Asymptotic theory for \(\wh \omega_1 := \wh \omega\)}:
 
 \textbf{Step 1:}
 
@@ -43,31 +43,31 @@ Thus, we must choose
 If \(X_i\) is also stationary sub-Gaussian process, then we can get the same result with an extra factor of \(\max_\theta f(\theta)\) where \(f(\theta)\) is the spectral density function. See Basu, Machailidis for details.
 
 \textbf{Step 2}: By the basic inequality,
-\[|\hat \omega|_1 \leq |\omega^*|_1\]
+\[|\wh \omega|_1 \leq |\omega^*|_1\]
 By triangle inequality,
-\[\begin{gathered}|\Sigma^*(\hat \omega - \omega^*)|_\infty \leq |\hat \Sigma(\hat \omega - \omega^*)|_\infty + |(\hat \Sigma - \Sigma^*)(\hat \omega - \omega^*)|_\infty \\
-\leq |\hat \Sigma \hat \omega - e_1|_\infty + |e_1 - \hat \Sigma \omega^*|_\infty + |\hat \Sigma - \Sigma^*|_\infty |\hat \omega - \omega^*|_1\end{gathered}\]
-Let \(t = |\hat \Sigma - \Sigma^*|_\infty\) be the maximum entry. We can bound
-\[|\hat \Sigma \hat \omega - e_1|_\infty \leq \lambda\]
+\[\begin{gathered}|\Sigma^*(\wh \omega - \omega^*)|_\infty \leq |\wh \Sigma(\wh \omega - \omega^*)|_\infty + |(\wh \Sigma - \Sigma^*)(\wh \omega - \omega^*)|_\infty \\
+\leq |\wh \Sigma \wh \omega - e_1|_\infty + |e_1 - \wh \Sigma \omega^*|_\infty + |\wh \Sigma - \Sigma^*|_\infty |\wh \omega - \omega^*|_1\end{gathered}\]
+Let \(t = |\wh \Sigma - \Sigma^*|_\infty\) be the maximum entry. We can bound
+\[|\wh \Sigma \wh \omega - e_1|_\infty \leq \lambda\]
 
-\[|\hat \Sigma \omega^* - e_1|_\infty \leq \lambda\]
+\[|\wh \Sigma \omega^* - e_1|_\infty \leq \lambda\]
 
-The last term we can bound by \(2\lambda\). So we\textquotesingle ve proven that \(|\Sigma^*(\hat \omega - \omega^*)|_\infty \leq 4\lambda\). Then we get
-\[|\hat \omega - \omega^*|_\infty = |\Omega^* \Sigma^*(\hat \omega - \omega^*)|_\infty \leq 4\lambda |\Omega^*|_{L_1}\]
-How can we bound \(|\hat \omega - \omega^*|_1\)? Assume \(0 \leq q < 1\). We need to assume
+The last term we can bound by \(2\lambda\). So we've proven that \(|\Sigma^*(\wh \omega - \omega^*)|_\infty \leq 4\lambda\). Then we get
+\[|\wh \omega - \omega^*|_\infty = |\Omega^* \Sigma^*(\wh \omega - \omega^*)|_\infty \leq 4\lambda |\Omega^*|_{L_1}\]
+How can we bound \(|\wh \omega - \omega^*|_1\)? Assume \(0 \leq q < 1\). We need to assume
 \[\max_k \sum_{j=1}^p |\omega_{jk}|^q \leq C\]
 For instance, when \(q = 0\), this is the assumption that all of the columns are \(C\)-sparse. When \(q \approx 0\), this is a "smallness" condition. Choose a subset
 \[A = \{j : |\omega_{j1}| \geq t\}, \qquad B = \{j : |\omega_{j1}| < t\}\]
 Then \(|A| \leq C/t^q\).
 
-\textbf{Homework}: Work out the remaining details. Read the CLIME paper by Tony Cai if you get stuck.
+\textbf{Homework}: Work out the remaining details. Read the CLIME paper \citep{CLM11} if you get stuck.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{High-dimensional regression}: Suppose we have \(Y = W \beta + \epsilon\). We can also do
 \[\min |\beta|_1 \st |W^\intercal W \beta - W^\intercal Y|_\infty \leq \lambda\]
 The constraint enforces an approximate solution to the normal equations. Using the same approach, we can get
-\[|\hat \beta - \beta|_\infty = O_p(t) |\Omega|_1 (1 + |\beta|_1)\]
+\[|\wh \beta - \beta|_\infty = O_p(t) |\Omega|_1 (1 + |\beta|_1)\]
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -80,5 +80,5 @@ where \(\lambda_i\) is the \(i\)th loading of the observation \(i\). A special c
 We assume that cross-sectional dependencies are squeezed into \(F_t\), such that \(\epsilon_{it}\) has no cross-sectional dependence. We want to estimate factors and loadings from the data. Assuming normality, the covariance matrix is
 \[\one\one^\intercal + I\]
 The eigenvalues are \(N + 1\) and \(1, \dots, 1\). We can estimate this with
-\[\hat \Sigma_n = \frac{1}{T}\sum_{t=1}^T x_t x_t^\intercal\]
-We can compute the eigendecomposition of \(\hat \Sigma_n\) and use a scree plot to find the correct number of factors. We can use Davis-Kahan to bound the distance between the eigenvectors. Golub and Van Loan also give a version of this theorem. Also see a paper by Wang, Samworth, Yu.
+\[\wh \Sigma_n = \frac{1}{T}\sum_{t=1}^T x_t x_t^\intercal\]
+We can compute the eigendecomposition of \(\wh \Sigma_n\) and use a scree plot to find the correct number of factors. We can use Davis--Kahan \citep{DK70} to bound the distance between the eigenvectors. Golub and Van Loan \citep{GVL13} also give a version of this theorem. Also see \citet{YWS15}.

@@ -13,7 +13,7 @@ Suppose \(L_p < 1\). Then
   GMC: \(\E|X_i(x_0) - X_i(x_0')]| \leq L_p^i\)
 \end{itemize}
 
-Let\textquotesingle s apply this to SGD:
+Let's apply this to SGD:
 \[X_i = X_{i-1} - \gamma g(X_{i-1}, \epsilon_i)\]
 Let \(m(x) = \E[g(x, \epsilon_i)]\). To ensure the stochastic Lipschitz condition, we need to ensure
 
@@ -33,7 +33,7 @@ Let \(X_i = g(\epsilon_i, \epsilon_{i-1}, \dots)\) and \(S_n = \sum_{i=1}^n X_i\
 
 \subparagraph{Example 1}
 
-Let \(X_i = \epsilon_i + Z\). Then \(\sqrt{n} \overline{X}_n = \sqrt{n} \overline{\epsilon_n} + \sqrt{n} Z\). By the ordinary CLT, \(\sqrt{n} \overline{\epsilon_n}\) is approximately normal. But \(\sqrt{n} Z\) is not bounded in probability, so no asymptotic distribution exists. We\textquotesingle ll see this again when we talk about factor models. Let \(\Var(\epsilon_n) = \Var(Z) = 1\) and let \(\epsilon_n \ind Z\). Then
+Let \(X_i = \epsilon_i + Z\). Then \(\sqrt{n} \overline{X}_n = \sqrt{n} \overline{\epsilon_n} + \sqrt{n} Z\). By the ordinary CLT, \(\sqrt{n} \overline{\epsilon_n}\) is approximately normal. But \(\sqrt{n} Z\) is not bounded in probability, so no asymptotic distribution exists. We'll see this again when we talk about factor models. Let \(\Var(\epsilon_n) = \Var(Z) = 1\) and let \(\epsilon_n \ind Z\). Then
 \[\gamma_k =
 \begin{cases}
 2, \quad k = 0 \\
@@ -81,8 +81,8 @@ If \(X_i\) is GMC, then \(\delta_k = O(\rho^k)\). This gives a CLT for iterated 
 
 We use a martingale approximation. \((M_k ,\mathcal F_k)\) is a martingale with \(\mathcal F_k = \sigma(\epsilon_k, \epsilon_{k-1}, \dots)\) the filtration. The martingale condition is \(\E[M_{k+1} \mid \mathcal F_k] = M_k\). The idea is to find a martingale and remainder term \(S_n = M_n + R_n\) such that \(\|R_n\|_2 = o(\sqrt n)\). Then
 \[\frac{S_n}{\sqrt{n}} = \frac{M_n}{\sqrt{n}} + \frac{R_n}{\sqrt{n}}\]
-There are already a host of CLTs for martingales: \(M_n / \sqrt{n} \Rightarrow \N(0, \sigma^2)\). IN particular, we\textquotesingle ll apply Billingsley\textquotesingle s CLT. To construct the martingale sequence, we introduce the idea of \emph{projection}:
-\[P_{j}[\cdot] = \E[\cdot \mid \mathcal F_j] - E[\cdot \mid \mathcal F_{j-1}]\]
+There are already a host of CLTs for martingales: \(M_n / \sqrt{n} \Rightarrow \N(0, \sigma^2)\). IN particular, we'll apply Billingsley's CLT. To construct the martingale sequence, we introduce the idea of \emph{projection}:
+\[P_{j}[\cdot] = \E[\cdot \mid \mathcal F_j] - \E[\cdot \mid \mathcal F_{j-1}]\]
 \textbf{Example}
 
 Let \(X = \sum_{l = -\infty}^\infty a_l \epsilon_{-l}\). Then

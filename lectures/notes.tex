@@ -1,14 +1,23 @@
 \documentclass[12pt]{article}
+\usepackage[round]{natbib} % must precede mymacros (which loads hyperref)
 \usepackage{mymacros}
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlength{\emergencystretch}{3em} % avoid overfull lines from long inline math
+\hypersetup{hidelinks} % no boxes around citations and refs
+
+% Paragraph spacing: block paragraphs, modest line spacing
+\setstretch{1.1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em plus 0.2em minus 0.1em}
+\setlist{itemsep=0.25em, topsep=0.4em}
 
 \title{STAT 30815: Asymptotic Theory for Time Series Analysis\\ and Stochastic Approximation Algorithms\\ Lecture Notes}
-\author{}
+\author{Jake Zummo}
 \date{Fall 2026}
 
 \begin{document}
 \maketitle
-\tableofcontents
+{\setstretch{1}\setlength{\parskip}{0pt}\tableofcontents}
 \newpage
 
 \input{tex/lec1}
@@ -26,5 +35,350 @@
 \input{tex/lec13}
 \input{tex/lec14}
 \input{tex/lec15}
+\input{tex/paper_notes}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0.3em}
+
+\bibitem[Bai and Silverstein(2010)]{BS10}
+Z.~Bai and J.~W. Silverstein.
+\newblock \emph{Spectral Analysis of Large Dimensional Random Matrices}.
+\newblock Springer, New York, 2nd edition, 2010.
+
+\bibitem[Berk(1974)]{Ber74}
+K.~N. Berk.
+\newblock Consistent autoregressive spectral estimates.
+\newblock \emph{Ann. Statist.}, 2(3):489--502, 1974.
+
+\bibitem[Bickel and Levina(2008a)]{BL08a}
+P.~J. Bickel and E.~Levina.
+\newblock Regularized estimation of large covariance matrices.
+\newblock \emph{Ann. Statist.}, 36:199--227, 2008a.
+
+\bibitem[Bickel and Levina(2008b)]{BL08b}
+P.~J. Bickel and E.~Levina.
+\newblock Covariance regularization by thresholding.
+\newblock \emph{Ann. Statist.}, 36:2577--2604, 2008b.
+
+\bibitem[Billingsley(1995)]{Bil95}
+P.~Billingsley.
+\newblock \emph{Probability and Measure}.
+\newblock Wiley, New York, 3rd edition, 1995.
+
+\bibitem[Cai et~al.(2011)Cai, Liu, and Luo]{CLM11}
+T.~Cai, W.~Liu, and X.~Luo.
+\newblock A constrained $\ell_1$ minimization approach to sparse precision matrix estimation.
+\newblock \emph{J. Amer. Statist. Assoc.}, 106(494):594--607, 2011.
+
+\bibitem[Chen et~al.(2013)Chen, Xu, and Wu]{CXW13}
+X.~Chen, M.~Xu, and W.~B. Wu.
+\newblock Covariance and precision matrix estimation for high-dimensional time series.
+\newblock \emph{Ann. Statist.}, 41(6):2994--3021, 2013.
+
+\bibitem[Davis and Kahan(1970)]{DK70}
+C.~Davis and W.~M. Kahan.
+\newblock The rotation of eigenvectors by a perturbation.~III.
+\newblock \emph{SIAM J. Numer. Anal.}, 7(1):1--46, 1970.
+
+\bibitem[El~Karoui(2008)]{EK08}
+N.~El~Karoui.
+\newblock Operator norm consistent estimation of large-dimensional sparse covariance matrices.
+\newblock \emph{Ann. Statist.}, 36:2717--2756, 2008.
+
+\bibitem[Geman(1980)]{Gem80}
+S.~Geman.
+\newblock A limit theorem for the norm of random matrices.
+\newblock \emph{Ann. Probab.}, 8:252--261, 1980.
+
+\bibitem[Golub and Van~Loan(2013)]{GVL13}
+G.~H. Golub and C.~F. Van~Loan.
+\newblock \emph{Matrix Computations}.
+\newblock Johns Hopkins University Press, Baltimore, 4th edition, 2013.
+
+\bibitem[Johansson(2000)]{Joh00}
+K.~Johansson.
+\newblock Shape fluctuations and random matrices.
+\newblock \emph{Comm. Math. Phys.}, 209:437--476, 2000.
+
+\bibitem[Johnstone(2001)]{Joh01}
+I.~M. Johnstone.
+\newblock On the distribution of the largest eigenvalue in principal components analysis.
+\newblock \emph{Ann. Statist.}, 29:295--327, 2001.
+
+\bibitem[Koltchinskii and Lounici(2017)]{KL17}
+V.~Koltchinskii and K.~Lounici.
+\newblock Concentration inequalities and moment bounds for sample covariance operators.
+\newblock \emph{Bernoulli}, 23:110--133, 2017.
+
+\bibitem[Lin and Liu(2009)]{LL09}
+Z.~Lin and W.~Liu.
+\newblock On maxima of periodograms of stationary processes.
+\newblock \emph{Ann. Statist.}, 37(5B):2676--2695, 2009.
+% TODO verify volume and pages (title and authors confirmed only by search snippet)
+
+\bibitem[Mar\v{c}enko and Pastur(1967)]{MP67}
+V.~A. Mar\v{c}enko and L.~A. Pastur.
+\newblock Distribution of eigenvalues for some sets of random matrices.
+\newblock \emph{Math. USSR-Sb.}, 1:457--483, 1967.
+
+\bibitem[Nagaev(1979)]{Nag79}
+S.~V. Nagaev.
+\newblock Large deviations of sums of independent random variables.
+\newblock \emph{Ann. Probab.}, 7:745--789, 1979.
+
+\bibitem[Peligrad and Wu(2010)]{PW10}
+M.~Peligrad and W.~B. Wu.
+\newblock Central limit theorem for Fourier transforms of stationary processes.
+\newblock \emph{Ann. Probab.}, 38(5), 2010. DOI 10.1214/10-AOP530.
+% TODO add page range (search results disagreed; lecture notes said 2011)
+
+\bibitem[Polyak and Juditsky(1992)]{PJ92}
+B.~T. Polyak and A.~B. Juditsky.
+\newblock Acceleration of stochastic approximation by averaging.
+\newblock \emph{SIAM J. Control Optim.}, 30(4):838--855, 1992.
+
+\bibitem[Robbins and Monro(1951)]{RM51}
+H.~Robbins and S.~Monro.
+\newblock A stochastic approximation method.
+\newblock \emph{Ann. Math. Statist.}, 22(3):400--407, 1951.
+
+\bibitem[Ruppert(1988)]{Rup88}
+D.~Ruppert.
+\newblock Efficient estimators from a slowly convergent {R}obbins--{M}onro process.
+\newblock Technical Report 781, School of Operations Research and Industrial Engineering, Cornell University, 1988.
+
+\bibitem[Stein(1999)]{Ste99}
+M.~L. Stein.
+\newblock \emph{Interpolation of Spatial Data: Some Theory for Kriging}.
+\newblock Springer, New York, 1999.
+
+\bibitem[Tracy and Widom(1994)]{TW94}
+C.~A. Tracy and H.~Widom.
+\newblock Level-spacing distributions and the {A}iry kernel.
+\newblock \emph{Comm. Math. Phys.}, 159:151--174, 1994.
+
+\bibitem[Tracy and Widom(1996)]{TW96}
+C.~A. Tracy and H.~Widom.
+\newblock On orthogonal and symplectic matrix ensembles.
+\newblock \emph{Comm. Math. Phys.}, 177:727--754, 1996.
+
+\bibitem[Wei et~al.(2026)Wei, Zhu, and Wu]{WZW26}
+Z.~Wei, W.~Zhu, and W.~B. Wu.
+\newblock General weighted averaging in stochastic gradient descent: {CLT} and adaptive optimality.
+\newblock In \emph{Proc. 29th Int. Conf. Artificial Intelligence and Statistics (AISTATS)}, 2026.
+% TODO verify title (arXiv preprint 2307.06915 is titled "Weighted averaged stochastic gradient descent: asymptotic normality and optimality")
+
+\bibitem[Wiener(1956)]{Wie56}
+N.~Wiener.
+\newblock Nonlinear prediction and dynamics.
+\newblock In \emph{Proc. Third Berkeley Symp. Math. Statist. Probab.}, volume~3, pages 247--252. Univ. California Press, 1956.
+
+\bibitem[Wu and Pourahmadi(2003)]{WP03}
+W.~B. Wu and M.~Pourahmadi.
+\newblock Nonparametric estimation of large covariance matrices of longitudinal data.
+\newblock \emph{Biometrika}, 90:831--844, 2003.
+
+\bibitem[Wu and Wu(2016)]{WW16}
+W.~B. Wu and Y.~N. Wu.
+\newblock Performance bounds for parameter estimates of high-dimensional linear models with correlated errors.
+\newblock \emph{Electron. J. Statist.}, 10(1):352--379, 2016.
+
+\bibitem[Xiao and Wu(2012)]{XW12}
+H.~Xiao and W.~B. Wu.
+\newblock Covariance matrix estimation for stationary time series.
+\newblock \emph{Ann. Statist.}, 40(1):466--493, 2012.
+
+\bibitem[Yin et~al.(1988)Yin, Bai, and Krishnaiah]{YBK88}
+Y.~Q. Yin, Z.~D. Bai, and P.~R. Krishnaiah.
+\newblock On the limit of the largest eigenvalue of the large dimensional sample covariance matrix.
+\newblock \emph{Probab. Theory Related Fields}, 78:509--521, 1988.
+
+\bibitem[Yu et~al.(2015)Yu, Wang, and Samworth]{YWS15}
+Y.~Yu, T.~Wang, and R.~J. Samworth.
+\newblock A useful variant of the {D}avis--{K}ahan theorem for statisticians.
+\newblock \emph{Biometrika}, 102(2):315--323, 2015.
+
+\bibitem[Zhang and Wu(2018)]{ZW18}
+D.~Zhang and W.~B. Wu.
+\newblock Asymptotic theory for estimators of high-order statistics of stationary processes.
+\newblock \emph{IEEE Trans. Inform. Theory}, 64(7):4907--4922, 2018.
+
+\end{thebibliography}
+
+\clearpage
+{
+\renewcommand{\refname}{Further Reading}
+\renewcommand{\bibpreamble}{Papers recommended by Wei Biao Wu.\par\medskip}
+\phantomsection
+\addcontentsline{toc}{section}{Further Reading}
+\begin{thebibliography}{99}
+\setlength{\itemsep}{0.3em}
+\bibitem[Adamek et~al.(2023a)Adamek, Smeekes, and Wilms]{FRAdamek23a}
+R.~Adamek, S.~Smeekes, and I.~Wilms.
+\newblock Lasso inference for high-dimensional time series.
+\newblock \emph{J. Econometrics}, 2023a.
+
+\bibitem[Adamek et~al.(2023b)Adamek, Smeekes, and Wilms]{FRAdamek23b}
+R.~Adamek, S.~Smeekes, and I.~Wilms.
+\newblock Sparse high-dimensional vector autoregressive bootstrap.
+\newblock arXiv preprint arXiv:2302.01233, 2023b.
+
+\bibitem[Ballarin(2026)]{FRBallarin26}
+G.~Ballarin.
+\newblock Impulse response analysis of structural nonlinear time series models.
+\newblock \emph{Rev. Econom. Statist.}, 2026.
+
+\bibitem[Barigozzi et~al.(2023)Barigozzi, Cho, and Owens]{FRBarigozzi23}
+M.~Barigozzi, H.~Cho, and D.~Owens.
+\newblock {FNETS}: Factor-adjusted network estimation and forecasting for high-dimensional time series.
+\newblock \emph{J. Bus. Econom. Statist.}, 2023.
+
+\bibitem[Barigozzi et~al.(2024)Barigozzi, Hallin, Luciani, and Zaffaroni]{FRBarigozzi24}
+M.~Barigozzi, M.~Hallin, M.~Luciani, and P.~Zaffaroni.
+\newblock Inferential theory for generalized dynamic factor models.
+\newblock \emph{J. Econometrics}, 2024.
+
+\bibitem[Barigozzi et~al.(2025)Barigozzi, La~Vecchia, and Liu]{FRBarigozzi25}
+M.~Barigozzi, D.~La~Vecchia, and H.~Liu.
+\newblock General spatio-temporal factor models for high-dimensional random fields on a lattice.
+\newblock \emph{Ann. Statist.}, 2025.
+
+\bibitem[Basu and Michailidis(2015)]{FRBasu15}
+S.~Basu and G.~Michailidis.
+\newblock Regularized estimation in sparse high-dimensional time series models.
+\newblock \emph{Ann. Statist.}, 43(4):1535--1567, 2015.
+
+\bibitem[Cai et~al.(2025a)Cai, Kong, Wu, and Zhao]{FRCai25a}
+X.~Cai, X.~Kong, X.~Wu, and P.~Zhao.
+\newblock Matrix-factor-augmented regression.
+\newblock \emph{J. Bus. Econom. Statist.}, 2025a.
+
+\bibitem[Cai et~al.(2025b)Cai, Liu, and Su]{FRCai25b}
+Z.~Cai, X.~Liu, and L.~Su.
+\newblock A functional-coefficient {VAR} model for dynamic quantiles and its application to constructing nonparametric financial network.
+\newblock \emph{J. Bus. Econom. Statist.}, 2025b.
+
+\bibitem[Cai et~al.(n.d.)Cai, Shao, Xiao, and Zhang]{FRCaiZJ}
+Z.-J. Cai, Q.-M. Shao, H.~Xiao, and Z.-S. Zhang.
+\newblock Berry--{E}sseen bounds for products of random matrices under a $2+\delta$ polynomial moment.
+\newblock Preprint.
+% TODO add year and arXiv number
+
+\bibitem[Cen et~al.(2026)Cen, Chen, and Lam]{FRCen26}
+Z.~Cen, Y.~Chen, and C.~Lam.
+\newblock Inference on dynamic spatial autoregressive models with change point detection.
+\newblock \emph{J. Bus. Econom. Statist.}, 2026.
+
+\bibitem[Characiejus et~al.(2024)Characiejus, Kokoszka, and Meng]{FRCharaciejus24}
+V.~Characiejus, P.~Kokoszka, and X.~Meng.
+\newblock Estimation of the long-run variance of nonlinear time series with an application to change point analysis.
+\newblock arXiv preprint arXiv:2404.02643, 2024.
+
+\bibitem[Chen et~al.(2024)Chen, Hong, and Li]{FRChen24}
+Q.~Chen, Y.~Hong, and H.~Li.
+\newblock Time-varying forecast combination for factor-augmented regressions with smooth structural changes.
+\newblock \emph{J. Econometrics}, 2024.
+
+\bibitem[Chernozhukov et~al.(2024)Chernozhukov, Fern{\'a}ndez-Val, Huang, and Wang]{FRChernozhukov24}
+V.~Chernozhukov, I.~Fern{\'a}ndez-Val, C.~Huang, and W.~Wang.
+\newblock Arellano--{B}ond {LASSO} estimator for dynamic linear panel models.
+\newblock arXiv preprint arXiv:2402.00584, 2024.
+
+\bibitem[Cho et~al.(2025)Cho, Kley, and Li]{FRCho25}
+H.~Cho, T.~Kley, and H.~Li.
+\newblock Detection and inference of changes in high-dimensional linear regression with nonsparse structures.
+\newblock \emph{J. Roy. Statist. Soc. Ser. B}, 2025.
+
+\bibitem[De~Vos and Stauskas(2025)]{FRDeVos25}
+I.~De~Vos and O.~Stauskas.
+\newblock Cross-section bootstrap for {CCE} regressions with general unknown factors.
+\newblock \emph{J. Bus. Econom. Statist.}, 2025.
+
+\bibitem[van Delft and Blumberg(2025)]{FRvanDelft25}
+A.~van Delft and A.~J. Blumberg.
+\newblock A statistical framework for analyzing shape in a time series of random geometric objects.
+\newblock \emph{Ann. Statist.}, 2025.
+
+\bibitem[Ghezzi et~al.(2024)Ghezzi, Rossi, and Trapani]{FRGhezzi24}
+F.~Ghezzi, E.~Rossi, and L.~Trapani.
+\newblock Fast online changepoint detection.
+\newblock arXiv preprint arXiv:2402.04433, 2024.
+
+\bibitem[Horv{\'a}th et~al.(2024)Horv{\'a}th, Kokoszka, and Lu]{FRHorvath24}
+L.~Horv{\'a}th, P.~Kokoszka, and S.~Lu.
+\newblock Variable selection based testing for parameter changes in regression with autoregressive dependence.
+\newblock \emph{J. Bus. Econom. Statist.}, 2024.
+
+\bibitem[Jin et~al.(2025)Jin, Lu, and Su]{FRJin25}
+S.~Jin, X.~Lu, and L.~Su.
+\newblock Three-dimensional heterogeneous panel data models with multi-level interactive fixed effects.
+\newblock \emph{J. Econometrics}, 2025.
+
+\bibitem[Khismatullina and Vogt(2026)]{FRKhismatullina26}
+M.~Khismatullina and M.~Vogt.
+\newblock Multiscale comparison of nonparametric trend curves.
+\newblock \emph{J. Bus. Econom. Statist.}, 2026.
+
+\bibitem[Kock et~al.(2026)Kock, Pedersen, and S{\o}rensen]{FRKock26}
+A.~B. Kock, R.~S. Pedersen, and J.~R.-V. S{\o}rensen.
+\newblock Data-driven tuning parameter selection for high-dimensional vector autoregressions.
+\newblock \emph{J. Amer. Statist. Assoc.}, 121(553):289--299, 2026.
+
+\bibitem[Krampe and Paparoditis(2025)]{FRKrampe25}
+J.~Krampe and E.~Paparoditis.
+\newblock Frequency domain statistical inference for high-dimensional time series.
+\newblock \emph{J. Amer. Statist. Assoc.}, 2025.
+
+\bibitem[Liu and Chan(2025)]{FRLiu25}
+X.~Liu and K.~W. Chan.
+\newblock Positive-definite converging kernel estimation of long-run variance.
+\newblock \emph{J. Bus. Econom. Statist.}, 2025.
+
+\bibitem[Margaritella and Sessinou(2025)]{FRMargaritella25}
+L.~Margaritella and R.~Sessinou.
+\newblock Precision least squares: Estimation and inference in high-dimensions.
+\newblock \emph{J. Bus. Econom. Statist.}, 2025.
+
+\bibitem[McGonigle and Cho(2025)]{FRMcGonigle25}
+E.~T. McGonigle and H.~Cho.
+\newblock Nonparametric data segmentation in multivariate time series via joint characteristic functions.
+\newblock \emph{Biometrika}, 2025.
+
+\bibitem[Miao et~al.(2023)Miao, Phillips, and Su]{FRMiao23}
+K.~Miao, P.~C.~B. Phillips, and L.~Su.
+\newblock High-dimensional {VAR}s with common factors.
+\newblock \emph{J. Econometrics}, 2023.
+
+\bibitem[Mies and Steland(2023)]{FRMies23}
+F.~Mies and A.~Steland.
+\newblock Sequential {G}aussian approximation for nonstationary time series in high dimensions.
+\newblock \emph{Bernoulli}, 2023.
+
+\bibitem[Sasaki and Zheng(n.d.)]{FRSasaki}
+Y.~Sasaki and B.~Zheng.
+\newblock Inference for high-dimensional network data.
+\newblock Preprint.
+% TODO add year and venue
+
+\bibitem[Wei et~al.(2025a)Wei, Bonnerjee, Li, and Wu]{FRWei25a}
+Z.~Wei, S.~Bonnerjee, J.~Li, and W.~B. Wu.
+\newblock Asymptotic theory of {SGD} with a general learning-rate.
+\newblock In \emph{Advances in Neural Information Processing Systems (NeurIPS)}, 2025a.
+
+\bibitem[Wei et~al.(2025b)Wei, Li, Chen, and Wu]{FRWei25b}
+Z.~Wei, J.~Li, L.~Chen, and W.~B. Wu.
+\newblock Online inference for quantiles by constant learning-rate stochastic gradient descent.
+\newblock arXiv preprint arXiv:2503.02178, 2025b.
+
+\bibitem[Zhang and Shao(2026)]{FRZhang26}
+T.~Zhang and Y.~Shao.
+\newblock Time-varying high quantile estimation for nonstationary tail dependent time series.
+\newblock \emph{J. Bus. Econom. Statist.}, 44(3), 2026.
+
+\end{thebibliography}
+}
 
 \end{document}

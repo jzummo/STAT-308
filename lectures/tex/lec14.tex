@@ -1,16 +1,14 @@
 \section{Lecture 14}
 
-STAT 308 Lec 14
-
-\textbf{Reviewi}: \(X_1, \dots, X_n \in \R^p\) iid. Let \(0 = \E[X_i]\) and \(\Sigma = \Cov X_i\). Then
-\[\tilde \Sigma_B = (\hat \Sigma * \one[|j - k| \leq B])\]
-We needed to bound the tail probability: \(\Pr(|S_n| \geq y)\). If \(X_i\) is sub-exponential, then we can use Bernstein\textquotesingle s inequality. If \(X_i\) only has polynomial moments, we can use the Fuk-Nagaev inequality. Compare Markov and Nageav inequality. We can show that
+\textbf{Review}: \(X_1, \dots, X_n \in \R^p\) iid. Let \(0 = \E[X_i]\) and \(\Sigma = \Cov X_i\). Then
+\[\wt \Sigma_B = (\wh \Sigma * \one[|j - k| \leq B])\]
+We needed to bound the tail probability: \(\Pr(|S_n| \geq y)\). If \(X_i\) is sub-exponential, then we can use Bernstein's inequality. If \(X_i\) only has polynomial moments, we can use the Fuk-Nagaev inequality. Compare Markov and Nagaev inequality. We can show that
 \[\E |S_n|^q = O(n^{q/2})\]
 using the Rosenthal inequality. When \(q = 2\), we have
 \[\E |S_n|^2 = n \Var[Z_i]\]
-so we know what the constant is exactly. If \(q > 2\), then Rosenthal\textquotesingle s inequality tells us that
+so we know what the constant is exactly. If \(q > 2\), then Rosenthal's inequality tells us that
 \[\E |S_n|^q \asymp c_1 \sum_i \E |Z_i|^q + c_2 \left(\sum_i \E Z_i^2\right)^{q/2}\]
-Rosenthal\textquotesingle s inequality was originally proven for the setting of martingale differences. This is related to the Burkholder-Davis-Gundy inequality.
+Rosenthal's inequality was originally proven for the setting of martingale differences. This is related to the Burkholder-Davis-Gundy inequality.
 
 \textbf{Homework}: Re-derive the convergence rate of the covariance matrix estimation using only moment assumptions instead of the full sub-exponential assumption. Use the Fuk-Nagaev inequality.
 
@@ -18,7 +16,7 @@ Rosenthal\textquotesingle s inequality was originally proven for the setting of 
 
 How can we extend to high dimensional time series? Suppose our setting is now that of stationary time seres. We want to bound
 \[Z_i = g(\epsilon_i, \epsilon_{i-1}, \dots)\]
-Recycling the previous proof structure, it suffices to bound the tail probabilities \(\Pr(|S_n| \geq y)\) under dependence now. Wu, Wu (2016) proved that
+Recycling the previous proof structure, it suffices to bound the tail probabilities \(\Pr(|S_n| \geq y)\) under dependence now. \citet{WW16} proved that
 \[\Pr(|S_n| \geq y) \leq \frac{n \| Z_{\cdot} \|_{2,\alpha}}{y} + \exp\left( -y^2/{n \| Z_{\cdot} \|_{2,\alpha}}  \right)\]
 We need to define the dependence adjusted norm:
 \[\|Z_{\cdot}\|_{q,\alpha} = \sup_{m \geq 0} (m + 1)^\alpha \sum_{i=m}^\infty \delta_i(q)\]
@@ -29,9 +27,9 @@ Smaller \(\alpha\) means weaker depenendece (\textbf{Verify this}). Whe \(\alpha
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 The Fuk-Nagaev inequality is almost a lower bound. Consider the case where \(S_n = Z_1 + \cdots + Z_n\) and \(Z_i \sim t_\nu\) and \(\nu > 2\). Then
-\[P(Z_i > y) \approx \frac{C}{y^\nu}\]
+\[\Pr(Z_i > y) \approx \frac{C}{y^\nu}\]
 And \(\E |Z_i|^\nu = \infty\) but \(Z_i\) has finite moments for all \(q < \nu\). Then
-\[\begin{gathered}P(S_n \geq y) \approx  n P(Z_1 > y) + 1 - \Phi(c y/\sqrt n) \\
+\[\begin{gathered}\Pr(S_n \geq y) \approx  n \Pr(Z_1 > y) + 1 - \Phi(c y/\sqrt n) \\
 \approx \frac{n C}{y^\nu} + 1 - \Phi(c y/\sqrt n)\end{gathered}\]
 in terms of relative difference. Compare the first and second term to those in the Fuk-Nagaev inequality.
 
@@ -39,7 +37,7 @@ in terms of relative difference. Compare the first and second term to those in t
 
 \textbf{Precision matrix estimation}
 
-We want to estimate \(\Omega = \Sigma^{-1}\) of \(X_1, \dots, X_n \in \R^p\). It\textquotesingle s not wise to directly invert the sample covariance matrix; if \(p > n\), then the sample covariance matrix is singular anyway, and cannot mathematically be inverted. Three methods are:
+We want to estimate \(\Omega = \Sigma^{-1}\) of \(X_1, \dots, X_n \in \R^p\). It's not wise to directly invert the sample covariance matrix; if \(p > n\), then the sample covariance matrix is singular anyway, and cannot mathematically be inverted. Three methods are:
 
 \begin{itemize}
 \tightlist
@@ -92,11 +90,11 @@ Note that that \(e\) are not inependent a priori. Set \(\E[ee^\intercal] = \Lamb
 The requirement that \(Q\) is orthogonal becomes a troublesome constraint in some proofs, versus the \(L\) matrix has no such constraints on the lower diagonal.
 
 Since we are in the high-dimensioal setting, we only take this Gram-Schmidt / AR lag process up to \(\ell\) lags. This gives us an estimator of the precision matrix. Then we get
-\[\hat \Omega = \hat L^{\intercal} \hat \Lambda^{-1} \hat L\]
+\[\wh \Omega = \wh L^{\intercal} \wh \Lambda^{-1} \wh L\]
 Peter Bickel provided an interpretation of this method, wherien \(\ell\) plays the same role in this autoregressive interpretation that the bandwidth \(B\) plays in an MA interpretation of the covariance matrix estimation.
 
 \textbf{Graphical lasso}: Given data \(X_1, \dots, X_n \sim \N(0, \Sigma)\), we minimize
-\[-\log \det \Omega - \Tr(\Omega \hat \Sigma_n) + \lambda |\Omega|_1\]
+\[-\log \det \Omega - \Tr(\Omega \wh \Sigma_n) + \lambda |\Omega|_1\]
 where \(|\Omega|_1 = \sum_{j,k} |\omega_{jk}|\). This method was proposed by Firedman, Hastie, Tibshirani in 2008. Since this is a convex optimization problem, it can be computed.
 
 The motivation is as follows: the density of normal observations is
@@ -106,9 +104,9 @@ Take the log
 = (n/2) \log \det \Omega - (1/2) \Tr(\Omega n\Sigma_n)\end{gathered}\]
 So the graphical lasso estimator is a form of \(\ell_1\)-regularized MLE.
 
-The asymptotics of the graphical lasso estimator for the time-series setting are developed in Chen, Xu, Wu (2013).
+The asymptotics of the graphical lasso estimator for the time-series setting are developed in \citet{CXW13}.
 
-\textbf{Dantzig Estimator}: Tony Cai developed this method, which he called the Clime estimator.
+\textbf{Dantzig Estimator}: Tony Cai developed this method \citep{CLM11}, which he called the Clime estimator.
 
 The exact relationship holds:
 \[\Sigma \Omega = I\]

@@ -5,14 +5,14 @@ Let \(\epsilon_t \sim\) iid. Let \(a \in \mathbb{R}\) be fixed.
 \[X_t = a X_{t-1} + \epsilon_t\]
 Unraveling this, we are led to a solution of the recursion
 \[X_t = \sum_{i=0}^\infty a^i \epsilon_{t-i}\]
-In what sense does \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) exist? Suppose \(Var[\epsilon_t] < \infty\). Then the series above converges in the mean-square sense. For any \(\epsilon > 0\),
+In what sense does \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) exist? Suppose \(\Var[\epsilon_t] < \infty\). Then the series above converges in the mean-square sense. For any \(\epsilon > 0\),
 \[\left\|\sum_{i=N}^M a^i \epsilon_{t-i} \right\|_2 = \sigma^2 \sum_{i=N}^M a^i < \epsilon\]
 if \(N, M\) are sufficiently large. This is the Cauchy criterion for the space of square-integrable random variables, and hence a limit exists by completeness. Next, does \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) converge almost surely?
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \subsection*{Kolmogorov Two Series Theorem}
-Let \(X_n\) be independent random variables. Then \(\sum_{n=1}^\infty X_n\) converges almost surely if \(\sum_{n=1}^\infty E[X_n]\) and \(\sum_{n=1}^\infty Var[X_n]\) converge almost surely.
+Let \(X_n\) be independent random variables. Then \(\sum_{n=1}^\infty X_n\) converges almost surely if \(\sum_{n=1}^\infty \E[X_n]\) and \(\sum_{n=1}^\infty \Var[X_n]\) converge almost surely.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -22,25 +22,25 @@ Let \(X_n\) be independent random variables. Then \(\sum_{n=1}^\infty X_n\) conv
 \begin{itemize}
 \tightlist
 \item
-  \(\sum_{n=1}^\infty P(|X_n| \geq A)\) converges
+  \(\sum_{n=1}^\infty \Pr(|X_n| \geq A)\) converges
 \item
-  Let \(Y_n = X_n1[|X_n| \leq A]\). Then
+  Let \(Y_n = X_n \one[|X_n| \leq A]\). Then
 
   \begin{itemize}
   \tightlist
   \item
-    \(\sum_{n=1}^\infty E[Y_n] < \infty\)
+    \(\sum_{n=1}^\infty \E[Y_n] < \infty\)
   \item
-    \(\sum_{n=1}^\infty Var[Y_n] < \infty\)
+    \(\sum_{n=1}^\infty \Var[Y_n] < \infty\)
   \end{itemize}
 \end{itemize}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Suppose \(Var[\epsilon_t] < \infty\). We can use the two-series theorem to prove sufficient conditions on \(a\) for which \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) converges.
-\[\sum_{i=0}^\infty E[a^i \epsilon_{t-i}] = \sum_{i=0}^\infty 0 = 0\]
+Suppose \(\Var[\epsilon_t] < \infty\). We can use the two-series theorem to prove sufficient conditions on \(a\) for which \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) converges.
+\[\sum_{i=0}^\infty \E[a^i \epsilon_{t-i}] = \sum_{i=0}^\infty 0 = 0\]
 
-\[\sum_{i=0}^\infty Var[a^i \epsilon_{t-i}] = \sum_{i=0}^\infty a^{2i}\sigma^2 < \infty\]
+\[\sum_{i=0}^\infty \Var[a^i \epsilon_{t-i}] = \sum_{i=0}^\infty a^{2i}\sigma^2 < \infty\]
 
 under the assumption that \(a^{2i} < 1\) or equivalently \(|a| < 1\).
 
@@ -75,9 +75,9 @@ converges almost surely (or in various moments) to a solution of the AR(1) recur
 \subsection*{Unit-Root AR(1) Process}
 Suppose \(a = 1\). There is no stationary solution to the AR(1) recursion in this case. Attempting to unravel the AR(1) recursion, we get
 \[X_t = \epsilon_t + \epsilon_{t-1} + \cdots = \sum_{i=0}^\infty \epsilon_{t-i}\]
-Unless \(\epsilon_t = 0\) almost surely, this does not converge to a well-defined random variable. Let \(A > 0\) be arbitrary. The first condition of Kolmogorov\textquotesingle s three series theorem necessitates that \(\sum_{i=0}^\infty P(|\epsilon_{t-i}| > A) < \infty\). Since \(\epsilon_{t-i}\) are identically distributed, this necessitates \(P(|\epsilon_t| > A) = 0\). Since \(A > 0\) was arbitrary, this implies \(\epsilon_t = 0\) almost surely.
+Unless \(\epsilon_t = 0\) almost surely, this does not converge to a well-defined random variable. Let \(A > 0\) be arbitrary. The first condition of Kolmogorov's three series theorem necessitates that \(\sum_{i=0}^\infty \Pr(|\epsilon_{t-i}| > A) < \infty\). Since \(\epsilon_{t-i}\) are identically distributed, this necessitates \(\Pr(|\epsilon_t| > A) = 0\). Since \(A > 0\) was arbitrary, this implies \(\epsilon_t = 0\) almost surely.
 
-For any constant \(c\), we can set \(X_t = c\) for \(t \leq 0\) and let \(X_t\) process via the aforementioned AR(1) recursion for \(t \geq 0\). This process is called a \emph{random walk}. It does not forgo its initialization, since \(E[X_t] = c\) for any \(t\) and \(Var[X_t] = t \sigma^2\) for \(t \geq 0\), assuming necessary moments.
+For any constant \(c\), we can set \(X_t = c\) for \(t \leq 0\) and let \(X_t\) process via the aforementioned AR(1) recursion for \(t \geq 0\). This process is called a \emph{random walk}. It does not forgo its initialization, since \(\E[X_t] = c\) for any \(t\) and \(\Var[X_t] = t \sigma^2\) for \(t \geq 0\), assuming necessary moments.
 
 Suppose \(a = -1\). Then TODO
 
@@ -95,8 +95,8 @@ The above recursion gives an implicit definition of \(g\) via
 \[g(\epsilon_t, \epsilon_{t-1}, \dots) = f(g(\epsilon_{t-1}, \epsilon_{t-2}, \dots), \epsilon_t)\]
 
 \subsection*{Stochastic Gradient Descent}
-We want to produce an estimate \(\hat\theta\) of a parameter \(\theta\) of a distribution or system. For instance, if \(f_\theta\) is the marginal likelihood of our data, and we want to perform online MLE. Let \(\hat\theta_0\) be arbitrary and define
-\[\hat\theta_t = \hat\theta_{t-1} - \gamma_t \frac{d}{d\theta} \log f_\theta(\epsilon_t) \Big\vert_{\theta = \hat\theta_{t-1}}\]
+We want to produce an estimate \(\wh\theta\) of a parameter \(\theta\) of a distribution or system. For instance, if \(f_\theta\) is the marginal likelihood of our data, and we want to perform online MLE. Let \(\wh\theta_0\) be arbitrary and define
+\[\wh\theta_t = \wh\theta_{t-1} - \gamma_t \frac{d}{d\theta} \log f_\theta(\epsilon_t) \Big\vert_{\theta = \wh\theta_{t-1}}\]
 where \(\gamma_t > 0\) is the learning rate sequence. The upshot of this approach is that we only need one gradient computation per step. This defines a discrete-time Markov process. This Markov chain is homogeneous if \(\gamma_t \equiv \gamma\) is constant.
 
 \subsection*{AR(p) Process}
@@ -112,9 +112,9 @@ Suppose we have data \(X_1, \dots, X_n\). How can we estimate these parameters \
 \[\min_{a_1, \dots, a_p} \sum_{t=p+1}^n (X_t - (a_1 X_{t-1} + \dots + a_p X_{t-p}))^2\]
 Classical time series analysis presumse that \(p\) is fixed but small, so that OLS is a feasible estimation strategy. We can write the normal equations as
 \[\begin{bmatrix}
-\hat a_1 \\
+\wh a_1 \\
 \vdots \\
-\hat a_p
+\wh a_p
 \end{bmatrix}
 = (Z^\intercal Z)^{-1} Z^\intercal Y,\]
 
@@ -133,7 +133,7 @@ X_p & \cdots & X_1
 \end{bmatrix}\]
 
 We need \(n - p > p\) in order to compute the least squares estimate. Under this regime:
-\[\sqrt{n}(\hat a - a) \implies   N(0, \sigma^2_\epsilon \Gamma_p^{-1})\]
+\[\sqrt{n}(\wh a - a) \implies   \N(0, \sigma^2_\epsilon \Gamma_p^{-1})\]
 where
 \[\Gamma_p =
 \begin{bmatrix}
@@ -144,8 +144,8 @@ where
 \end{bmatrix}\]
 In the high-dimensional regime where \(p \sim cn\), both consistency \& the CLT fail.
 
-If \(p = o(n^{1/3})\), then \(\hat a\) is consistent for \(a\) (Berk 1974). Since the dimensionality is growing, we need to be careful to assert the relevant norm in which to measure consistency. The precise result is
-\[\max_{1 \leq j \leq p} |\hat a_j - a_j| \overset{p}{\rightarrow} 0\]
+If \(p = o(n^{1/3})\), then \(\wh a\) is consistent for \(a\) \citep{Ber74}. Since the dimensionality is growing, we need to be careful to assert the relevant norm in which to measure consistency. The precise result is
+\[\max_{1 \leq j \leq p} |\wh a_j - a_j| \cp 0\]
 How about other norms?
 
 \subsection*{Vector Autoregression}
@@ -172,40 +172,40 @@ X_{n,j}
 Right-multiplying the AR(1) recursion by \(X_{t-1}^\intercal\), we have
 \[X_t X_{t-1}^\intercal = A X_{t-1} X_{t-1}^\intercal + \epsilon_{t-1} X_{t-1}^\intercal\]
 Taking expectations,
-\[E[X_t X_{t-1}^\intercal] = A E[X_{t-1}X_{t-1}^\intercal] + 0\]
+\[\E[X_t X_{t-1}^\intercal] = A \E[X_{t-1}X_{t-1}^\intercal] + 0\]
 Let
 \[\Gamma_0 =
 \begin{bmatrix}
-E[X_{t,1}^2] & E[X_{t,1}X_{t,2}] & \cdots & E[X_{t,1}X_{t,p}] \\
-E[X_{t,2}X_{t,1}] & E[X_{t,2}^2] & \cdots & E[X_{t,2}X_{t,p}] \\
+E[X_{t,1}^2] & \E[X_{t,1}X_{t,2}] & \cdots & \E[X_{t,1}X_{t,p}] \\
+E[X_{t,2}X_{t,1}] & \E[X_{t,2}^2] & \cdots & \E[X_{t,2}X_{t,p}] \\
 \vdots & \vdots & \ddots & \vdots \\
-E[X_{t,p}X_{t,1}] & E[X_{t,p}X_{t,2} & \cdots & E[X_{t,p}^2]
+E[X_{t,p}X_{t,1}] & \E[X_{t,p}X_{t,2} & \cdots & \E[X_{t,p}^2]
 \end{bmatrix}
 =
 E[X_t X_t^\intercal]\]
 
 \[\Gamma_1 =
 \begin{bmatrix}
-E[X_{t,1}X_{t-1,1}] & E[X_{t,1}X_{t-1,2}] & \cdots & E[X_{t,1}X_{t-1,p}] \\
-E[X_{t,2}X_{t-1,1}] & E[X_{t,2}X_{t-1,2}] & \cdots & E[X_{t,2}X_{t-1,p}] \\
+E[X_{t,1}X_{t-1,1}] & \E[X_{t,1}X_{t-1,2}] & \cdots & \E[X_{t,1}X_{t-1,p}] \\
+E[X_{t,2}X_{t-1,1}] & \E[X_{t,2}X_{t-1,2}] & \cdots & \E[X_{t,2}X_{t-1,p}] \\
 \vdots & \vdots & \cdots & \vdots \\
-E[X_{t,p}X_{t-1,1}] & E[X_{t,p}X_{t-1,2}] & \cdots & E[X_{t,p}X_{t-1,p}]
+E[X_{t,p}X_{t-1,1}] & \E[X_{t,p}X_{t-1,2}] & \cdots & \E[X_{t,p}X_{t-1,p}]
 \end{bmatrix}
 =
 E[X_t X_{t-1}^\intercal]\]
 
 Then we have the population equation
 \[\Gamma_1 = A \Gamma_0\]
-Let \(\hat\Gamma_1\) and \(\hat\Gamma_0\) be the plug-in estimates. The Dantzig estimate of \(A\) is
-\[\min_A \|A\|_1, \quad \text{s.t. } \|\hat\Gamma_1 - A\hat\Gamma_0\|_\infty \leq \lambda\]
+Let \(\wh\Gamma_1\) and \(\wh\Gamma_0\) be the plug-in estimates. The Dantzig estimate of \(A\) is
+\[\min_A \|A\|_1, \quad \text{s.t. } \|\wh\Gamma_1 - A\wh\Gamma_0\|_\infty \leq \lambda\]
 The norms \(\|\cdot\|_1\) and \(\|\cdot\|_\infty\) are the vectorized \(\ell_1\) and \(\ell_\infty\) norms. This is a linear program with \(p^2\) inputs \(A_{ij}\). However, this optimization problem decouples into \(p\) subproblems, each with \(p\) inputs, in the following way:
 
 TODO
 
 \subsection*{Inference of Means}
 Let \(X_1, \dots, X_n\) be realizations of a stationary process. How can we estimate the marginal mean \(\mu\)? The BLUE estimate can be written as
-\[\tilde \mu = \sum_{i=1}^n w_i X_i = w^\intercal X\]
-Unbiasedness requires that \(\sum_{i=1}^n w_i = 1\). The variance of \(\tilde \mu\) is \(w^\intercal \Gamma_n w\). The Lagrangian for this linearly constrained quadratic program is thus
+\[\wt \mu = \sum_{i=1}^n w_i X_i = w^\intercal X\]
+Unbiasedness requires that \(\sum_{i=1}^n w_i = 1\). The variance of \(\wt \mu\) is \(w^\intercal \Gamma_n w\). The Lagrangian for this linearly constrained quadratic program is thus
 \[w^\intercal \Gamma_n w - \lambda (w^\intercal \mathbf{1} - 1)\]
 
 The stationarity conditions are
@@ -213,4 +213,4 @@ The stationarity conditions are
 With the normalization constraint, the solution becomes
 \[w = \frac{\Gamma_n^{-1} \mathbf{1}}{\mathbf{1}^\intercal \Gamma_n^{-1} \mathbf{1}}\]
 The BLUE is
-\[\tilde \mu = \frac{\mathbf{1}^\intercal \Gamma_n^{-1} X}{\mathbf{1}^\intercal \Gamma_n^{-1} \mathbf{1}}\]
+\[\wt \mu = \frac{\mathbf{1}^\intercal \Gamma_n^{-1} X}{\mathbf{1}^\intercal \Gamma_n^{-1} \mathbf{1}}\]

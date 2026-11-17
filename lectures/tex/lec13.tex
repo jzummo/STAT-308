@@ -1,15 +1,16 @@
 \section{Lecture 13}
+\noindent\textit{Notes written by Giorgio Micaletto}
 
 \textbf{Estimation of high-dimensional covariance matrices}
 
-We turn to covariance matrices of i.i.d.\ high-dimensional vectors. When the dimension is comparable to the sample size, the sample covariance matrix is inconsistent in operator norm: its spectrum spreads out according to the Marchenko--Pastur law, and its largest eigenvalue fluctuates on the Tracy--Widom scale. In general the error is governed by the effective rank of \(\Sigma\), and consistency can be restored by regularization: banding (Bickel and Levina 2008a) or thresholding (Bickel and Levina 2008b).
+We turn to covariance matrices of i.i.d.\ high-dimensional vectors. When the dimension is comparable to the sample size, the sample covariance matrix is inconsistent in operator norm: its spectrum spreads out according to the Marchenko--Pastur law, and its largest eigenvalue fluctuates on the Tracy--Widom scale. In general the error is governed by the effective rank of \(\Sigma\), and consistency can be restored by regularization: banding \citep{BL08a} or thresholding \citep{BL08b}.
 
 \textbf{Setting and notation.} The observations \(X_1, \dots, X_n \in \R^p\) are i.i.d.\ with \(\E X_i = 0\), covariance \(\Sigma = \Cov(X_i) = (\sigma_{jk})\) and precision matrix \(\Omega = \Sigma^{-1}\). Write \(X_i = (X_{i1}, \dots, X_{ip})^\top\). With the mean known to be \(0\), the sample covariance matrix is
 \[\wh\Sigma_n = \frac{1}{n} \sum_{i=1}^n X_i X_i^\top = (\wh\sigma_{jk})_{j,k=1}^p, \qquad \wh\sigma_{jk} = \frac{1}{n} \sum_{i=1}^n X_{ij} X_{ik}.\]
 We would like to estimate \(\Omega\) by \(\wh\Omega_n = \wh\Sigma_n^{-1}\). For a symmetric matrix \(M\), \(\rho(M) = \max_l |\lambda_l(M)| = \opnorm{M}\) denotes its spectral radius. We repeatedly use
-\begin{equation}\tag{R}\label{eq:rowsum}
+\begin{equation*}
 \rho(M) \le \max_k \sum_{j=1}^p |m_{jk}| \qquad (M = M^\top),
-\end{equation}
+\end{equation*}
 which holds because every eigenvalue lies in a Gershgorin disc.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -19,7 +20,7 @@ which holds because every eigenvalue lies in a Gershgorin disc.
 \begin{enumerate}[label=(\roman*)]
 \item If \(p > n\), then \(\rank(\wh\Sigma_n) \le n < p\), so \(\wh\Sigma_n\) is singular and \(\wh\Omega_n = \wh\Sigma_n^{-1}\) does not exist.
 \item If \(p\) is fixed (or small relative to \(n\)), \(\wh\Sigma_n \to \Sigma\) almost surely by the law of large numbers, also in operator norm.
-\item If \(p\) is large, this breaks down even in the simplest case. Let \(p = n\) and let the \(X_{ij}\) be i.i.d.\ \(\N(0,1)\), so that \(\Sigma\) is the identity (note that now the entries are i.i.d.\ too, not just the vectors). Then \(\rho(\wh\Sigma_n) \to 4\) almost surely (Geman 1980; Yin, Bai and Krishnaiah 1988), while \(\rho(\Sigma) = 1\). Since also \(\lambda_{\min}(\wh\Sigma_n) \to 0\), the eigenvalues of \(\wh\Sigma_n - \Sigma\) fill out \([-1, 3]\) and \(\rho(\wh\Sigma_n - \Sigma) \to 3\). Moreover \(\wh\Sigma_n^{-1}\), although it exists for \(p = n\), has \(\rho(\wh\Sigma_n^{-1}) \to \infty\). For \(p/n \to y \in (0, \infty)\) the limit of \(\rho(\wh\Sigma_n)\) is \((1 + \sqrt y)^2\).
+\item If \(p\) is large, this breaks down even in the simplest case. Let \(p = n\) and let the \(X_{ij}\) be i.i.d.\ \(\N(0,1)\), so that \(\Sigma\) is the identity (note that now the entries are i.i.d.\ too, not just the vectors). Then \(\rho(\wh\Sigma_n) \to 4\) almost surely \citep{Gem80,YBK88}, while \(\rho(\Sigma) = 1\). Since also \(\lambda_{\min}(\wh\Sigma_n) \to 0\), the eigenvalues of \(\wh\Sigma_n - \Sigma\) fill out \([-1, 3]\) and \(\rho(\wh\Sigma_n - \Sigma) \to 3\). Moreover \(\wh\Sigma_n^{-1}\), although it exists for \(p = n\), has \(\rho(\wh\Sigma_n^{-1}) \to \infty\). For \(p/n \to y \in (0, \infty)\) the limit of \(\rho(\wh\Sigma_n)\) is \((1 + \sqrt y)^2\).
 \end{enumerate}
 
 \textbf{Marchenko--Pastur}
@@ -35,7 +36,7 @@ plus an atom of mass \(1 - 1/y\) at \(0\) when \(y > 1\). In particular, for \(p
 i.e.\ \(F_1\) is the law of \(4U\) with \(U \sim \BetaDist(\tfrac12, \tfrac32)\).
 \end{theorem}
 
-See Marchenko and Pastur (1967) and Bai and Silverstein (2010, Ch.~3). On the board the density read \(\sqrt{t(4-t)}/(\pi t)\); the constant must be \(2\pi\) for it to integrate to \(1\), since \(\int_0^4 \sqrt{(4-t)/t}\, dt = 2\pi\) (substitute \(t = 4\sin^2\varphi\)). The Beta form follows from \(B(\tfrac12, \tfrac32) = \pi/2\). Although the variables are independent with variance \(1\), the eigenvalues of \(\wh\Sigma_n\) spread over the whole interval \([0, 4]\) (Figure~\ref{fig:mp}).
+See \citet{MP67} and \citet[Ch.~3]{BS10}. On the board the density read \(\sqrt{t(4-t)}/(\pi t)\); the constant must be \(2\pi\) for it to integrate to \(1\), since \(\int_0^4 \sqrt{(4-t)/t}\, dt = 2\pi\) (substitute \(t = 4\sin^2\varphi\)). The Beta form follows from \(B(\tfrac12, \tfrac32) = \pi/2\). Although the variables are independent with variance \(1\), the eigenvalues of \(\wh\Sigma_n\) spread over the whole interval \([0, 4]\) (Figure~\ref{fig:mp}).
 
 \begin{figure}[ht]
 \centering
@@ -93,7 +94,7 @@ The moments of the ESD are normalized traces:
 Suppose \(F\) is determined by its moments, which holds under Carleman's condition \(\sum_{k=1}^\infty \beta_{2k}^{-1/(2k)} = \infty\), in particular if \(F\) has compact support. If \(\int t^k\, d\wh F_n(t) \to \beta_k\) in probability for every \(k = 1, 2, \dots\), then \(\wh F_n \Rightarrow F\) in probability.
 \end{lemma}
 
-This is the method of moments (Billingsley 1995, Thm.~30.2), applied along subsequences. On the board Carleman's condition appeared as \(\sum_k \beta_{2k}^{-1/(2k)} < \infty\); the condition for determinacy is divergence of the series. For the Marchenko--Pastur law with \(y = 1\) it is automatic: the support is \([0, 4]\), so \(\beta_{2k}^{1/(2k)} \le 4\) and every term of the series is at least \(1/4\).
+This is the method of moments \citep[Thm.~30.2]{Bil95}, applied along subsequences. On the board Carleman's condition appeared as \(\sum_k \beta_{2k}^{-1/(2k)} < \infty\); the condition for determinacy is divergence of the series. For the Marchenko--Pastur law with \(y = 1\) it is automatic: the support is \([0, 4]\), so \(\beta_{2k}^{1/(2k)} \le 4\) and every term of the series is at least \(1/4\).
 
 The first two moments answer the question marks on the board.
 
@@ -112,7 +113,7 @@ For \(j \ne k\) the inner square has mean \(n\); for \(j = k\) it has mean \(\E(
 The variance bound is a similar but longer computation. If \(U \sim \BetaDist(a, b)\) then \(\E U^k = \prod_{r=0}^{k-1} \frac{a+r}{a+b+r}\); with \(a = \frac12\), \(b = \frac32\) this gives \(\E(4U) = 1\) and \(\E(4U)^2 = 2\).
 \end{proof}
 
-\textbf{Remark (all moments).} In general \(\frac{1}{p} \Tr \wh\Sigma_n^k \to \beta_k(y) = \sum_{r=0}^{k-1} \frac{y^r}{r+1} \binom{k}{r} \binom{k-1}{r}\) in probability (Bai and Silverstein 2010, Sec.~3.1). Expanding
+\textbf{Remark (all moments).} In general \(\frac{1}{p} \Tr \wh\Sigma_n^k \to \beta_k(y) = \sum_{r=0}^{k-1} \frac{y^r}{r+1} \binom{k}{r} \binom{k-1}{r}\) in probability \citep[Sec.~3.1]{BS10}. Expanding
 \[\Tr\big(\wh\Sigma_n^k\big) = n^{-k} \sum X_{i_1 j_1} X_{i_1 j_2} X_{i_2 j_2} X_{i_2 j_3} \cdots X_{i_k j_k} X_{i_k j_1}\]
 as a sum over closed walks \(j_1 \to i_1 \to j_2 \to \dots \to i_k \to j_1\) on a bipartite graph, the leading contributions come from walks that traverse each edge exactly twice and whose edges form a tree; counting them gives \(\beta_k(y)\). For \(y = 1\) these are the Catalan numbers \(\beta_k = \frac{1}{k+1} \binom{2k}{k} = 1, 2, 5, 14, 42, \dots\), which are exactly the moments of \(4U\): \(\E(4U)^k = 4^k \prod_{r=0}^{k-1} \frac{1/2 + r}{2 + r} = \frac{(2k)!}{k!\,(k+1)!}\). By Lemma~\ref{lmm:moments}, \(\wh F_n \Rightarrow F_1\). The proof via moments needs all moments of \(X_{ij}\); finite variance suffices after truncation.
 
@@ -120,20 +121,20 @@ as a sum over closed walks \(j_1 \to i_1 \to j_2 \to \dots \to i_k \to j_1\) on 
 \[\wh\lambda_1^k \le \sum_{l=1}^p \wh\lambda_l^k = \Tr\big(\wh\Sigma_n^k\big) \le p\, \wh\lambda_1^k,
 \qquad\text{so}\qquad
 \wh\lambda_1 \le \big(\Tr \wh\Sigma_n^k\big)^{1/k} \le p^{1/k}\, \wh\lambda_1.\]
-Once \(k \gg \log p\), \(p^{1/k} \to 1\) and \(\sum_l \wh\lambda_l^k \approx \wh\lambda_1^k\) (the largest eigenvalue dominates). Bounding \(\E \Tr(\wh\Sigma_n^{k_n})\) with \(k = k_n \to \infty\) is how Geman (1980) proved \(\wh\lambda_1 \to (1 + \sqrt y)^2\).
+Once \(k \gg \log p\), \(p^{1/k} \to 1\) and \(\sum_l \wh\lambda_l^k \approx \wh\lambda_1^k\) (the largest eigenvalue dominates). Bounding \(\E \Tr(\wh\Sigma_n^{k_n})\) with \(k = k_n \to \infty\) is how \citet{Gem80} proved \(\wh\lambda_1 \to (1 + \sqrt y)^2\).
 
 \textbf{Tracy--Widom}
 
-\begin{theorem}[Johnstone 2001]\label{thm:tw}
+\begin{theorem}[\citet{Joh01}]\label{thm:tw}
 Let the \(X_{ij}\) be i.i.d.\ \(\N(0,1)\) and \(p = n\). Then
 \[n^{2/3}\big(\wh\lambda_1 - 4\big) \Rightarrow 2^{4/3}\, W_1, \qquad W_1 \sim F_1\ \text{(Tracy--Widom law of order 1)}.\]
-More generally, with \(\mu_{np} = (\sqrt{n-1} + \sqrt p)^2\) and \(\sigma_{np} = (\sqrt{n-1} + \sqrt p)\big(\frac{1}{\sqrt{n-1}} + \frac{1}{\sqrt p}\big)^{1/3}\), \((n\wh\lambda_1 - \mu_{np})/\sigma_{np} \Rightarrow F_1\) when \(n/p\) converges to a positive constant (see Johnstone 2001 for the precise conditions). For \(p = n\), \(\mu_{np}/n = 4 + O(n^{-1})\) and \(\sigma_{np} \sim 2^{4/3} n^{1/3}\), which gives the display.
+More generally, with \(\mu_{np} = (\sqrt{n-1} + \sqrt p)^2\) and \(\sigma_{np} = (\sqrt{n-1} + \sqrt p)\big(\frac{1}{\sqrt{n-1}} + \frac{1}{\sqrt p}\big)^{1/3}\), \((n\wh\lambda_1 - \mu_{np})/\sigma_{np} \Rightarrow F_1\) when \(n/p\) converges to a positive constant (see \citet{Joh01} for the precise conditions). For \(p = n\), \(\mu_{np}/n = 4 + O(n^{-1})\) and \(\sigma_{np} \sim 2^{4/3} n^{1/3}\), which gives the display.
 \end{theorem}
 
-The Tracy--Widom distribution functions are (Tracy and Widom 1994, 1996)
+The Tracy--Widom distribution functions are \citep{TW94,TW96}
 \[F_2(x) = \exp\Big(-\int_x^\infty (t - x)\, q(t)^2\, dt\Big), \qquad
 F_1(x) = \exp\Big(-\frac{1}{2} \int_x^\infty \big[q(t) + (t - x)\, q(t)^2\big]\, dt\Big),\]
-where \(q\) solves the Painlev\'e II equation \(q'' = tq + 2q^3\) with \(q(t) \sim \mathrm{Ai}(t)\) as \(t \to \infty\) (the Hastings--McLeod solution). On the board, \(e^{\int_x^\infty (t-x)^2 q^2(t)\, dt}\) was labeled as the pdf. The correct formula is the c.d.f.\ \(F_2\) above: a minus sign in the exponent and the factor \((t - x)\) without the square. \(F_2\) is the limit for complex Gaussian data (Johansson 2000); for real data, as here, the limit is \(F_1\). Note the scale: the largest eigenvalue fluctuates at order \(n^{-2/3}\), much smaller than the usual \(n^{-1/2}\).
+where \(q\) solves the Painlev\'e II equation \(q'' = tq + 2q^3\) with \(q(t) \sim \mathrm{Ai}(t)\) as \(t \to \infty\) (the Hastings--McLeod solution). On the board, \(e^{\int_x^\infty (t-x)^2 q^2(t)\, dt}\) was labeled as the pdf. The correct formula is the c.d.f.\ \(F_2\) above: a minus sign in the exponent and the factor \((t - x)\) without the square. \(F_2\) is the limit for complex Gaussian data \citep{Joh00}; for real data, as here, the limit is \(F_1\). Note the scale: the largest eigenvalue fluctuates at order \(n^{-2/3}\), much smaller than the usual \(n^{-1/2}\).
 
 \textbf{These results are of limited use to statisticians.} They assume not only that the vectors \(X_i\) are i.i.d.\ but also that the entries within each vector are, and they give no consistency. What we want is a consistent estimator.
 
@@ -144,7 +145,7 @@ where \(q\) solves the Painlev\'e II equation \(q'' = tq + 2q^3\) with \(q(t) \s
 In general the coordinates \(X_{i1}, \dots, X_{ip}\) of \(X_i\) are dependent, and the relevant measure of dimension is the effective rank
 \[r(\Sigma) = \frac{\Tr(\Sigma)}{\rho(\Sigma)} \in [1, p].\]
 
-\begin{theorem}[Koltchinskii and Lounici 2017]\label{thm:kl}
+\begin{theorem}[\citet{KL17}]\label{thm:kl}
 If the \(X_i\) are centered Gaussian vectors, then, with absolute constants in \(\asymp\),
 \[\E\, \rho\big(\wh\Sigma_n - \Sigma\big) \asymp \rho(\Sigma) \Big(\sqrt{\frac{r(\Sigma)}{n}} \ \vee\ \frac{r(\Sigma)}{n}\Big).\]
 \end{theorem}
@@ -162,20 +163,20 @@ All this tells us how bad the estimate is. How do we make it consistent?
 \textbf{Banding}
 
 We add assumptions. Suppose the variables have a natural order (time, space, wavelength) and \(\Sigma\) can be approximated by banded matrices. This is reasonable because things far apart are less correlated. For \(\alpha > 0\) consider the bandable classes
-\begin{equation}\tag{B}\label{eq:bandable}
+\begin{equation*}
 \max_k \sum_{j:\, |j-k| > B} |\sigma_{jk}| \le C\, B^{-\alpha} \quad\text{for all } B \ge 1
 \qquad\text{or}\qquad
 \max_k \sum_{j:\, |j-k| > B} |\sigma_{jk}| \le C_1 e^{-C_2 B}.
-\end{equation}
+\end{equation*}
 Examples:
 \begin{itemize}
 \item Covariances \(\sigma_{jk} = f(|j-k|)\) with \(|f(d)| \le C d^{-1-\alpha}\) fall in the polynomial class.
-\item Exponentially decaying \(f\) fall in the exponential class. This includes the AR(1) covariance \(\sigma_{jk} \propto \phi^{|j-k|}\), \(|\phi| < 1\), and the Mat\'ern covariance functions of spatial statistics (Stein 1999).
+\item Exponentially decaying \(f\) fall in the exponential class. This includes the AR(1) covariance \(\sigma_{jk} \propto \phi^{|j-k|}\), \(|\phi| < 1\), and the Mat\'ern covariance functions of spatial statistics \citep{Ste99}.
 \end{itemize}
 
-For AR-type dependence it is the precision matrix \(\Omega\), rather than \(\Sigma\), that is banded (tridiagonal for an AR(1)). One then bands \(\Omega\) through its modified Cholesky decomposition, which amounts to fitting AR regressions (Wu and Pourahmadi 2003; Bickel and Levina 2008a). (Wu and Pourahmadi's 2003 paper treated the precision matrix first; Bickel later acknowledged its importance.)
+For AR-type dependence it is the precision matrix \(\Omega\), rather than \(\Sigma\), that is banded (tridiagonal for an AR(1)). One then bands \(\Omega\) through its modified Cholesky decomposition, which amounts to fitting AR regressions \citep{WP03,BL08a}. (\citeauthor{WP03}'s \citeyear{WP03} paper treated the precision matrix first; Bickel later acknowledged its importance.)
 
-The banded estimator of Bickel and Levina (2008a) keeps only the first \(B\) diagonals:
+The banded estimator of \citet{BL08a} keeps only the first \(B\) diagonals:
 \[\wt\Sigma_{n,B} = \big(\wh\sigma_{jk}\, \one\{|j-k| \le B\}\big)_{j,k=1}^p,\]
 the Schur (entrywise) product of \(\wh\Sigma_n\) with the banding mask.
 
@@ -184,8 +185,8 @@ Let \(Z_1, \dots, Z_n\) be i.i.d.\ with \(\E Z_1 = 0\) and \(\E|Z_1|^m \le \frac
 \[\Pr\Big(\Big|\sum_{i=1}^n Z_i\Big| \ge u\Big) \le 2\exp\Big(-\frac{u^2}{C_1 u + C_2\, n \E Z_1^2}\Big), \qquad C_1 = 2K,\ C_2 = 2.\]
 \end{lemma}
 
-\begin{theorem}[Bickel and Levina 2008a]\label{thm:band}
-Let \(X_i \sim \N(0, \Sigma)\) with \(\max_j \sigma_{jj} \le M\) and \(\Sigma\) in the polynomial class \eqref{eq:bandable}, and let \(p = p_n \to \infty\) with \(\log p / n \to 0\). Then
+\begin{theorem}[\citet{BL08a}]\label{thm:band}
+Let \(X_i \sim \N(0, \Sigma)\) with \(\max_j \sigma_{jj} \le M\) and \(\Sigma\) in the polynomial bandable class above, and let \(p = p_n \to \infty\) with \(\log p / n \to 0\). Then
 \[\rho\big(\wt\Sigma_{n,B} - \Sigma\big) = O_{\Pr}\Big(B \sqrt{\frac{\log p}{n}} + B^{-\alpha}\Big).\]
 In particular \(\rho(\wt\Sigma_{n,B} - \Sigma) \to 0\) in probability whenever \(B = B_n \to \infty\) and \(B_n \sqrt{\log p / n} \to 0\). The choice \(B \asymp (n/\log p)^{1/(2(\alpha+1))}\) gives the rate \((\log p / n)^{\alpha/(2(\alpha+1))}\).
 \end{theorem}
@@ -193,9 +194,9 @@ In particular \(\rho(\wt\Sigma_{n,B} - \Sigma) \to 0\) in probability whenever \
 \begin{proof}
 Split into a variance part and a bias part:
 \[\rho\big(\wt\Sigma_{n,B} - \Sigma\big) \le \rho\big(\wt\Sigma_{n,B} - \E\wt\Sigma_{n,B}\big) + \rho\big(\E\wt\Sigma_{n,B} - \Sigma\big).\]
-\emph{Bias.} Since \(\E\wh\sigma_{jk} = \sigma_{jk}\), the matrix \(\E\wt\Sigma_{n,B} - \Sigma\) is \(0\) inside the band and \(-\sigma_{jk}\) outside. By \eqref{eq:rowsum} and \eqref{eq:bandable},
+\emph{Bias.} Since \(\E\wh\sigma_{jk} = \sigma_{jk}\), the matrix \(\E\wt\Sigma_{n,B} - \Sigma\) is \(0\) inside the band and \(-\sigma_{jk}\) outside. By the row-sum bound (Gershgorin) and the bandability condition above,
 \[\rho\big(\E\wt\Sigma_{n,B} - \Sigma\big) \le \max_k \sum_{j:\, |j-k| > B} |\sigma_{jk}| \le C B^{-\alpha}.\]
-\emph{Variance.} By \eqref{eq:rowsum},
+\emph{Variance.} By the row-sum bound above,
 \[\rho\big(\wt\Sigma_{n,B} - \E\wt\Sigma_{n,B}\big) \le \max_k \sum_{j:\, |j-k| \le B} |\wh\sigma_{jk} - \sigma_{jk}| \le (2B+1) \max_{j,k} |\wh\sigma_{jk} - \sigma_{jk}|.\]
 We need \(y\) such that \(\Pr\big(\max_k \sum_{|j-k| \le B} |\wh\sigma_{jk} - \sigma_{jk}| \ge y\big) \to 0\). A union bound over the \(p\) rows, and then over the at most \(2B+1 \le p\) entries in each row, gives
 \begin{align*}
@@ -212,11 +213,11 @@ with a big constant \(C\), both exponents are at least \(3 \log p\) and the boun
 which is \(O(B\sqrt{\log p / n})\) because \(\log p / n \to 0\). Combining the two parts proves the bound, and balancing \(B \sqrt{\log p / n}\) against \(B^{-\alpha}\) gives the optimal \(B\).
 \end{proof}
 
-\textbf{Remark.} The dimension enters only through \(\log p\), the price of the union bound over \(p^2\) entries, so \(p\) may grow exponentially in \(n\): \(p = e^{o(n)}\) is allowed. For example, with \(n = 100\), \(p\) can be as large as \(e^{99}\). Compare the time-series case of the last lecture: there a single realization and the Toeplitz structure lead to rates \(B/\sqrt n\), or \(\sqrt{B \log B / n}\); here we have \(n\) replicates but no structure across entries. Bickel and Levina (2008a) also prove the rate for \(\wt\Sigma_{n,B}^{-1}\) when \(\Sigma\) is well conditioned, and extend the result to sub-Gaussian tails.
+\textbf{Remark.} The dimension enters only through \(\log p\), the price of the union bound over \(p^2\) entries, so \(p\) may grow exponentially in \(n\): \(p = e^{o(n)}\) is allowed. For example, with \(n = 100\), \(p\) can be as large as \(e^{99}\). Compare the time-series case of the last lecture: there a single realization and the Toeplitz structure lead to rates \(B/\sqrt n\), or \(\sqrt{B \log B / n}\); here we have \(n\) replicates but no structure across entries. \citet{BL08a} also prove the rate for \(\wt\Sigma_{n,B}^{-1}\) when \(\Sigma\) is well conditioned, and extend the result to sub-Gaussian tails.
 
 \textbf{Nagaev's inequality}
 
-Bernstein's inequality requires exponential moments. If \(Z_i\) only has a finite \(q\)-th moment, \(q > 2\), Nagaev's inequality (Nagaev 1979; see Lecture 11) gives, for i.i.d.\ centered \(Z_i\),
+Bernstein's inequality requires exponential moments. If \(Z_i\) only has a finite \(q\)-th moment, \(q > 2\), Nagaev's inequality (\citealp{Nag79}; see Lecture 11) gives, for i.i.d.\ centered \(Z_i\),
 \[\Pr\Big(\Big|\sum_{i=1}^n Z_i\Big| \ge y\Big) \le C_1\, \frac{n \E|Z_1|^q}{y^q} + C_2 \exp\Big(-C_3\, \frac{y^2}{n \E Z_1^2}\Big).\]
 On the board the factor \(n\) in the polynomial term was missing. The exponential term reproduces the Gaussian-type bound used above (only the constants change relative to Bernstein); the polynomial term is new.
 
@@ -231,11 +232,11 @@ Banding uses the order of the variables. When there is no natural order but \(\S
 \text{thresholded: }T_u(\wh\Sigma_n) = \big(\wh\sigma_{jk}\, \one\{|\wh\sigma_{jk}| \ge u\}\big).\]
 Unlike the banded estimator, we do not need to impose spatial structure, and thresholding is invariant under permutations of the variables. By the argument in the proof of Theorem~\ref{thm:band}, \(\max_{j,k} |\wh\sigma_{jk} - \sigma_{jk}| = O_{\Pr}(\sqrt{\log p / n})\), so a threshold \(u \asymp \sqrt{\log p / n}\) removes the entries that are pure noise. As with banding, positive definiteness may be lost.
 
-\begin{theorem}[Bickel and Levina 2008b]
+\begin{theorem}[\citet{BL08b}]
 Let \(X_i \sim \N(0, \Sigma)\), \(0 \le q < 1\), and consider the class \(\mathcal U(q, c_0(p), M) = \{\Sigma : \sigma_{jj} \le M,\ \max_j \sum_k |\sigma_{jk}|^q \le c_0(p)\}\). If \(u = M' \sqrt{\log p / n}\) with \(M'\) large enough and \(\log p / n \to 0\), then uniformly on this class
 \[\rho\big(T_u(\wh\Sigma_n) - \Sigma\big) = O_{\Pr}\Big(c_0(p) \Big(\frac{\log p}{n}\Big)^{(1-q)/2}\Big).\]
 \end{theorem}
 
-For \(q = 0\), \(c_0(p)\) bounds the number of nonzero entries per row. See also El Karoui (2008).
+For \(q = 0\), \(c_0(p)\) bounds the number of nonzero entries per row. See also \citet{EK08}.
 
 \textbf{Next class:} the precision matrix and the factor model.
