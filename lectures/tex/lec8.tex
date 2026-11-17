@@ -1,0 +1,103 @@
+\section{Lecture 8}
+
+CLT for stationary processes
+
+\(X_i = g(\epsilon_i, \epsilon_{i-1}, \dots)\), where \(\epsilon_i \iid\) and \(\E[g] = 0\). Define
+\[\delta_i = \|g(\epsilon_i, \dots, \epsilon_1, \epsilon_0, \epsilon_{-1}, \dots) - g(\epsilon_i, \dots, \epsilon_1, \epsilon_0', \epsilon_{-1}, \dots)\|\]
+Assume \(\sum_{i=0}^\infty \delta_i < \infty\). Then \(S_n / \sqrt{n} \Rightarrow \N(0, \sigma_\infty^2)\). Also, we\textquotesingle ll show that
+\[\sigma^2_\infty = \sum_{k=-\infty}^\infty \gamma_k \leq \left( \sum_{i=0}^\infty \delta_i \right)^2\]
+\textbf{Proof}
+
+Introduce the projection operator
+\[P_j[\cdot] = \E[\cdot \mid \mathcal F_j] - \E[\cdot \mid \mathcal F_{j-1}]\]
+Then \(P_j[\cdot]\) defines a martingale difference sequence. A martingale difference sequence \(D_n\) must be \(\mathcal{F}_n\) measurable and satisfy
+\[\E[D_n \mid \mathcal F_{n-1}] = 0\]
+Let \(X\) be a random variable. Then certainly \(P_j[X]\) is \(\mathcal{F}_j\) measurable (by the filtration property), and
+\[\E[P_j[X]] = \E[\E[X \mid \mathcal{F}_j]] - \E[\E[X \mid \mathcal{F}_{j-1}]] = 0\]
+Define
+\[\theta_i = \|P_0 X_i\| = \| \E[X_i \mid \mathcal{F}_0] - \E[X_i \mid \mathcal{F}_{-1}]\|\]
+We call this the \emph{predictive dependence measure}. This measures the impact of \(\epsilon_0\) for predicting \(X_i\). It turns out that \(\theta_i \leq \delta_i\).
+
+\textbf{Example} Let \(g(\epsilon_i, \epsilon_{i-1}, \dots) = \epsilon_i \epsilon_{i-1}\) where \(\epsilon_i \iid \N(0, 1)\). Then
+\[\delta_1 = \|\epsilon_1\epsilon_0 - \epsilon_1 \epsilon_0'\| = \sqrt{2}\]
+And
+\[\theta_1 = \E[X_1 \mid \mathcal{F}_0] = 0\]
+Actually for the CLT, we can state this: if \(\sum_{i=0}^\infty \theta_i < \infty\), then \(S_n / \sqrt{n} \Rightarrow \N(0,\ \sigma^2_\infty)\) and
+\[\sigma^2_\infty \leq \left( \sum_{i=0}^\infty \theta_i \right)^2\]
+In fact, in many cases, \(\sigma^2_\infty = \left(\sum_{i=1}^\infty \theta_i\right)^2\). We\textquotesingle ll prove the inequality first. Observe that
+\[\begin{gathered}\E[X_i \mid \mathcal{F}_{-1}] = \E[g(\epsilon_i, \dots, \epsilon_0, \epsilon_{-1}, \dots) \mid \mathcal{F}_{-1}] \\
+= \E[g(\epsilon_i, \dots, \epsilon_0', \epsilon_{-1}, \dots) \mid \mathcal{F}_{-1}] \\
+= \E[g(\epsilon_i, \dots, \epsilon_0', \epsilon_{-1}, \dots) \mid \mathcal{F}_0]\end{gathered}\]
+Therefore,
+\[\begin{gathered}= \|\E[g(\epsilon_i, \dots, \epsilon_0, \dots) \mid \mathcal{F}_0] - \E[g(\epsilon_i, \dots, \epsilon_0', \dots)  \mid \mathcal{F}_0]\| \\
+\leq \|X_i - X_i'\|\end{gathered}\]
+By Jensen\textquotesingle s inequality.
+
+\textbf{Homework}
+
+Let \(X_i\) be a linear process with \(a_i \sim i^{-\beta}\). Then CLT 1 requires \(\beta > 1\) while CLT 2 requires \(\beta \geq 3/4\).
+
+\textbf{Proof of CLT 2}
+
+Define \(D_0 = \sum_{i=0}^\infty P_0 X_i\). This is well-defined in \(L^2\) because
+\[\|D_0\| \leq \sum_{i=0}^\infty \theta_i\]
+Define \(D_1 = \sum_{i=1}^\infty P_1 X_i\). By stationarity,
+\[\|P_1 X_i\| = \|P_0 X_{i-1}\|\]
+Therefore, \(\|D_1\| \leq \sum_{i=1}^\infty \theta_{i-1}\). Also, \(D_1 = \sum_{i=0}^\infty P_1 X_i\) too because \(P_1 X_0 = 0\). Similarly, define \(D_2 = \sum_{i=0}^\infty P_2 X_i\).
+
+\textbf{Claim}: \(D_0 \ed D_1\). This is because of stationarity
+
+\textbf{Claim}: \(\E[D_j \mid \mathcal{F}_{j-1}] = 0.\)
+
+Let \(M_n = D_1 + \cdots + D_n\). Let \(S_n = M_n + R_n\). We\textquotesingle ll prove
+
+\begin{itemize}
+\tightlist
+\item
+  \(M_n/\sqrt{n} \Rightarrow \N(0, \|D_0\|^2)\)
+\item
+  \(\E[R_n^2] = o(n)\)
+\end{itemize}
+
+For example, for the linear case,
+\[D_0 = \left( \sum_{i=0}^\infty a_i \right) \epsilon_0\]
+Then \(\|D_0\| = \sum_{i=0}^\infty a_i\) and \(\sum_{i=0}^\infty \theta_i = \sum_{i=0}^\infty |a_i|\). This shows the bound is sharp.
+
+For the first bullet point, we invoke Billingsley\textquotesingle s CLT. For the second, we can write
+\[R_n = \sum_{j=-\infty}^\infty P_j[R_n]\]
+Now the sequence \(P_j[R_n]\) is a martingale difference sequence in \(j\), so we have orthogonality:
+\[\E[R_n^2] = \sum_{j=-\infty}^\infty \E[P_j[R_n]^2]\]
+We need only take the summation up to \(j = n+1\) because \(P_j[R_n] = 0\) for \(j \geq n + 1\). Next, we\textquotesingle ll show
+\[\sum_{j=-\infty}^0 \|P_j R_n\|^2 = o(n)\]
+
+\[\sum_{j=1}^\infty \|P_jR_n\|^2 = o(n)\]
+
+For the first, note that
+\[P_j R_n = P_j S_n - P_j M_n\]
+If \(j \leq 0\), then \(P_j M_n = 0\). Next, we tackle \(\sum_{j=-\infty}^0 \|P_j S_n\|^2\).
+\[\begin{gathered}\|P_j S_n\| \leq \sum_{j=1}^n \|P_j X_i\| \\
+= \sum_{i=1}^n \theta_{i-j}\end{gathered}\]
+We need to verify that
+\[\sum_{j=-\infty}^0 \left( \sum_{i=1}^n \theta_{i-j} \right)^2 = o(n)\]
+This is now a calculus problem. We use the Cesaro limit theorem.
+
+For the next part, let\textquotesingle s do an example.
+\[P_1 R_n = P_1 S_n - P_1 M_n\]
+
+\[\begin{gathered}P_1 M_n = P_1 D_1 + P_1 D_2 + \cdots + P_1 D_n = D_1 + 0 + \cdots + 0 \\
+= -\sum_{i=n+1}^\infty P_1 X_i\end{gathered}\]
+
+So
+\[\|P_1 R_n\| \leq \sum_{i=n+1}^\infty \|P_1 X_i\| = \sum_{i=n+1}^\infty \theta_{i-1}\]
+Next,
+\[\begin{gathered}P_2 R_n = P_2 S_n - D_2 \\
+= \sum_{i=n+1}^\infty P_2 X_i\end{gathered}\]
+So
+\[\|P_2 R_n\| \leq \sum_{i=n+1}^\infty \theta_{i-2}\]
+So we see that
+\[\sum_{j=1}^n \|P_j R_n\|^2 = A_n^2 + \cdots + A_1^2 = o(n)\]
+By the Cesaro limit theorem again. This technique is called \emph{martingale approximation}. These ideas on martingale approximation trace back to Doob, Gordin, Dedecker, Melevede. Next time, we\textquotesingle ll use an \(m\)-dependent approximation. The idea is as follows: replace
+\[X_i = g(\epsilon_i, \epsilon_{i-1}, \dots)\]
+with
+\[X_{i,m} = g_m(\epsilon_i, \dots, \epsilon_{i-m}) = \E[X_i \mid \epsilon_i, \dots, \epsilon_{i-m}]\]
+The \(m\)-dependent approximation technique is much more useful for tackling high dimensions.

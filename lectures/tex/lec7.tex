@@ -1,0 +1,93 @@
+\section{Lecture 7}
+
+\subsection*{Review}
+Let \(X_i = F(X_{i-1}, \epsilon_i)\). Let
+\[L_p = \E \sup_{x \neq x'} \frac{|F_\epsilon(x) - F_\epsilon(x')|^p}{|x - x'|^p}\]
+Suppose \(L_p < 1\). Then
+
+\begin{itemize}
+\tightlist
+\item
+  \(X_i = g(\epsilon_i, \epsilon_{i-1}, \dots) \in L^p\)
+\item
+  GMC: \(\E|X_i(x_0) - X_i(x_0')]| \leq L_p^i\)
+\end{itemize}
+
+Let\textquotesingle s apply this to SGD:
+\[X_i = X_{i-1} - \gamma g(X_{i-1}, \epsilon_i)\]
+Let \(m(x) = \E[g(x, \epsilon_i)]\). To ensure the stochastic Lipschitz condition, we need to ensure
+
+\begin{itemize}
+\tightlist
+\item
+  \(m\) is \(\mu\)-strongly convex
+\item
+  Lipschitz continuity: \(\|g(x, \epsilon) - g(x', \epsilon)\| \leq C_p \|x - x\|\)
+\end{itemize}
+
+Then the stochastic Lipschitz condition holds for all \(\gamma < \gamma(p)\). The convexity condition is nearly essential for this conclusion to hold.
+
+\subsection*{CLT For stationary processes}
+Let \(X_i = g(\epsilon_i, \epsilon_{i-1}, \dots)\) and \(S_n = \sum_{i=1}^n X_i\) be the partial sum process. Assume \(\E[X_i] = 0\). Under what conditiosn can we get a CLT:
+\[S_n/\sqrt{n} \Rightarrow \N(0, \sigma^2)\]
+
+\subparagraph{Example 1}
+
+Let \(X_i = \epsilon_i + Z\). Then \(\sqrt{n} \overline{X}_n = \sqrt{n} \overline{\epsilon_n} + \sqrt{n} Z\). By the ordinary CLT, \(\sqrt{n} \overline{\epsilon_n}\) is approximately normal. But \(\sqrt{n} Z\) is not bounded in probability, so no asymptotic distribution exists. We\textquotesingle ll see this again when we talk about factor models. Let \(\Var(\epsilon_n) = \Var(Z) = 1\) and let \(\epsilon_n \ind Z\). Then
+\[\gamma_k =
+\begin{cases}
+2, \quad k = 0 \\
+1, \quad k \neq 1
+\end{cases}\]
+Since \(\sum_{k \in \Z} \gamma_k = \infty\), this is a long-memory process. Moreover, this process is not ergodic
+
+\subparagraph{Example 2}
+
+Let \(X_i = \sum_{j=0}^\infty a_j \epsilon_{i-j}\) with \(a_0 = 0\) and \(a_j = 1/j\) for \(j \geq 1\). Let \(\epsilon_i\) be Rademacher. Then
+\[\frac{S_n}{\sqrt{n \log n}} \Rightarrow \N(0, \sigma^2)\]
+So the \(\sqrt n\)-CLT fails. Yet we do have a CLT with a different normalizing sequence. This is because
+\[\sum_{k \in \Z} \gamma_k = \left( \sum_{j=0}^\infty a_j^2 \right)\]
+And if \(a_j = j^{-\beta}\) for \(1/2 < \beta < 1\), then
+\[\frac{S_n}{n^{3/2 - \beta}} \Rightarrow \N(0, \sigma^2)\]
+In order to get a CLT, we need to ensure that \(\sum_{k \in \Z} \gamma_k < \infty\). However, this condition is not sufficient. For example, we can construct a white noise sequence \(X_i\) such that \(\Cov(X_i, X_j) = 0\) if \(i \neq j\) such that \(S_n / \sqrt{n} \Rightarrow \N(0, \sigma^2)\).
+
+\textbf{Ibragimov conjecture}
+
+For \(\phi\)-mixing stationary process, \(S_n / \sqrt{ \Var S_n } \Rightarrow \N(0, \sigma^2)\). This was recently disproven by OpenAI.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Let \(X_i = g(\epsilon_i, \epsilon_{i-1}, \dots, \epsilon_0, \dots)\) and \(X_i^* = g(\epsilon_i, \epsilon_{i-1}, \dots, \epsilon_0', \dots)\) denote coupled realizations of the stochastic process. Let \(\delta_i = \|X_i - X_i^*\|_2\). Assume \(\sum_{i=0}^\infty \delta_i < \infty\). Then \(S_n/\sqrt{n} \Rightarrow \N(0, \sigma^2)\) for \(\sigma^2 = \sum_{k \in \Z} \gamma_k\) the long-run variance. Also,
+\[\sigma^2 = \sum_{k \in \Z} \gamma_k \leq \left( \sum_{i=0}^\infty \delta_i \right)^2\]
+\textbf{Example}
+
+Let \(X_i\) be a linear process where \(\epsilon_i \iid (0, 1)\). Then
+\[X_i - X_i^* = a_i(\epsilon_0 - \epsilon_0')\]
+So
+\[\|X_i - X_i^*\|_2 = |a_i| \|\epsilon_0 - \epsilon_0'\|_2 = \sqrt{2}|a_i|\]
+Then the stability condition becomes
+\[\sum_{i=0}^\infty |a_i| < \infty\]
+This excludes linear processes with \(a_j \sim j^{-\beta}\) for \(\beta \leq 1\).
+
+\textbf{Example}
+\[X_i = \left| \sum_{j=0}^\infty a_j \epsilon_{i-j} \right| - \E \left| \sum_{j=0}^\infty a_j \epsilon_{i-j} \right|\]
+By the reverse triangle inequality, \(\delta_i \leq \|a_i \epsilon_0 - a_i \epsilon_0'\|_2\). So the same condition works.
+
+\textbf{Example}
+
+If \(X_i\) is GMC, then \(\delta_k = O(\rho^k)\). This gives a CLT for iterated random function systems.
+
+\subparagraph{Proof}
+
+We use a martingale approximation. \((M_k ,\mathcal F_k)\) is a martingale with \(\mathcal F_k = \sigma(\epsilon_k, \epsilon_{k-1}, \dots)\) the filtration. The martingale condition is \(\E[M_{k+1} \mid \mathcal F_k] = M_k\). The idea is to find a martingale and remainder term \(S_n = M_n + R_n\) such that \(\|R_n\|_2 = o(\sqrt n)\). Then
+\[\frac{S_n}{\sqrt{n}} = \frac{M_n}{\sqrt{n}} + \frac{R_n}{\sqrt{n}}\]
+There are already a host of CLTs for martingales: \(M_n / \sqrt{n} \Rightarrow \N(0, \sigma^2)\). IN particular, we\textquotesingle ll apply Billingsley\textquotesingle s CLT. To construct the martingale sequence, we introduce the idea of \emph{projection}:
+\[P_{j}[\cdot] = \E[\cdot \mid \mathcal F_j] - E[\cdot \mid \mathcal F_{j-1}]\]
+\textbf{Example}
+
+Let \(X = \sum_{l = -\infty}^\infty a_l \epsilon_{-l}\). Then
+\[P_j X = a_{-j} \epsilon_j\]
+Then it follows from this calculation that
+\[X = \sum_{j=-\infty}^\infty P_j X\]
+We will show
+\[S_n = \sum_{j=-\infty}^\infty P_j S_n\]

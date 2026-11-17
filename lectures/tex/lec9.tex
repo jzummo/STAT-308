@@ -1,0 +1,21 @@
+\section{Lecture 9}
+
+Setting: \(X_i = g(\epsilon_i, \epsilon_{i-1}, \dots)\) where \(\epsilon_i \iid\). Let \(S_n = \sum_{i=1}^n X_i\).
+
+The CLT states: if \(\sum_{i=0}^\infty \|P_0 X_i\| < \infty\), then \(\frac{S_n}{\sqrt{n}} \Rightarrow \N(0, \sigma^2_\infty)\). Also, \(\sigma^2_\infty = \|D_0\|\) where \(D_0 = \sum_{i=0}^\infty P_0 X_i\).
+
+\textbf{Remark}: The CLT is valid in the following non-causal setting:
+\[X_i = g(\cdots, \epsilon_{i+1}, \epsilon_i, \epsilon_{i-1}, \dots)\]
+We define \(D_0 = \sum_{i=-\infty}^\infty P_0 X_i\) and \(\mathcal F_i = \sigma(\epsilon_i, \epsilon_{i-1}, \dots)\).
+
+\textbf{Remark}: The CLT also holds for random fields. For instance, if
+\[X_i = g(\epsilon_{i - j}, i, j \in \Z^2).\]
+
+Observe that
+\[\frac{\E[S_n^2]}{n} = \sum_{k=-n}^n \left(1 - \frac{|k|}{n}\right)\gamma_k \longrightarrow \sum_{k=-\infty}^\infty \gamma_k\]
+This follows from the dominated convergence theorem. Another consequence of the CLT is that \(\|D_0\|^2 = \sum_{k=-\infty}^\infty \gamma_k = \sigma^2_\infty\). This follows because
+\[\begin{gathered}\sigma^2_\infty = \sum_{k=-\infty}^\infty \E[X_0 X_k] \\
+= \sum_{k=-\infty}^\infty \E\left[ \left(\sum_{j=-\infty}^\infty P_j X_0\right)\left(\sum_{j=-\infty}^\infty P_j X_k\right) \right] \\
+= \sum_{k=-\infty}^\infty \sum_{j=-\infty}^\infty \E[P_j X_0 \cdot P_j X_k] \end{gathered}\]
+
+\subsection*{TODO FINISH}

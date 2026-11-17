@@ -1,0 +1,117 @@
+\section{Lecture 14}
+
+STAT 308 Lec 14
+
+\textbf{Reviewi}: \(X_1, \dots, X_n \in \R^p\) iid. Let \(0 = \E[X_i]\) and \(\Sigma = \Cov X_i\). Then
+\[\tilde \Sigma_B = (\hat \Sigma * \one[|j - k| \leq B])\]
+We needed to bound the tail probability: \(\Pr(|S_n| \geq y)\). If \(X_i\) is sub-exponential, then we can use Bernstein\textquotesingle s inequality. If \(X_i\) only has polynomial moments, we can use the Fuk-Nagaev inequality. Compare Markov and Nageav inequality. We can show that
+\[\E |S_n|^q = O(n^{q/2})\]
+using the Rosenthal inequality. When \(q = 2\), we have
+\[\E |S_n|^2 = n \Var[Z_i]\]
+so we know what the constant is exactly. If \(q > 2\), then Rosenthal\textquotesingle s inequality tells us that
+\[\E |S_n|^q \asymp c_1 \sum_i \E |Z_i|^q + c_2 \left(\sum_i \E Z_i^2\right)^{q/2}\]
+Rosenthal\textquotesingle s inequality was originally proven for the setting of martingale differences. This is related to the Burkholder-Davis-Gundy inequality.
+
+\textbf{Homework}: Re-derive the convergence rate of the covariance matrix estimation using only moment assumptions instead of the full sub-exponential assumption. Use the Fuk-Nagaev inequality.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+How can we extend to high dimensional time series? Suppose our setting is now that of stationary time seres. We want to bound
+\[Z_i = g(\epsilon_i, \epsilon_{i-1}, \dots)\]
+Recycling the previous proof structure, it suffices to bound the tail probabilities \(\Pr(|S_n| \geq y)\) under dependence now. Wu, Wu (2016) proved that
+\[\Pr(|S_n| \geq y) \leq \frac{n \| Z_{\cdot} \|_{2,\alpha}}{y} + \exp\left( -y^2/{n \| Z_{\cdot} \|_{2,\alpha}}  \right)\]
+We need to define the dependence adjusted norm:
+\[\|Z_{\cdot}\|_{q,\alpha} = \sup_{m \geq 0} (m + 1)^\alpha \sum_{i=m}^\infty \delta_i(q)\]
+Here \(\alpha > 0\) is a parameter that controls the rate of dependence, since
+\[\sum_{i=m}^\infty \delta_i(q) \leq (m + 1)^{-\alpha} \|Z_{\cdot}\|_{q,\alpha}\]
+Smaller \(\alpha\) means weaker depenendece (\textbf{Verify this}). Whe \(\alpha > 1/2 - 1/q\), the previous proof follows through.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+The Fuk-Nagaev inequality is almost a lower bound. Consider the case where \(S_n = Z_1 + \cdots + Z_n\) and \(Z_i \sim t_\nu\) and \(\nu > 2\). Then
+\[P(Z_i > y) \approx \frac{C}{y^\nu}\]
+And \(\E |Z_i|^\nu = \infty\) but \(Z_i\) has finite moments for all \(q < \nu\). Then
+\[\begin{gathered}P(S_n \geq y) \approx  n P(Z_1 > y) + 1 - \Phi(c y/\sqrt n) \\
+\approx \frac{n C}{y^\nu} + 1 - \Phi(c y/\sqrt n)\end{gathered}\]
+in terms of relative difference. Compare the first and second term to those in the Fuk-Nagaev inequality.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Precision matrix estimation}
+
+We want to estimate \(\Omega = \Sigma^{-1}\) of \(X_1, \dots, X_n \in \R^p\). It\textquotesingle s not wise to directly invert the sample covariance matrix; if \(p > n\), then the sample covariance matrix is singular anyway, and cannot mathematically be inverted. Three methods are:
+
+\begin{itemize}
+\tightlist
+\item
+  Cholesky decomposition
+\item
+  Graphical lasso
+\item
+  Dantzig
+\end{itemize}
+
+\textbf{Cholesky method}: For a symmetric matrix \(\Lambda\), we can decompose
+\[\Lambda = L \Sigma L^\intercal,\]
+where \(L\) is lower-triangular with unit variance and \(\Sigma\) is diagonal. How can we interpret the Cholesky decomposition statistically? An interpretation due to Mohsen Pourahmadi is to interpret the process according to an autoregressive process. Suppose
+\[X_1 =
+\begin{pmatrix}
+Y_1 \\
+\vdots \\
+Y_p
+\end{pmatrix}
+\sim \N(0, \Sigma)\]
+Then we can find \(t_{21}\) such that
+\[Y_2 = t_{21} Y_1 + \epsilon_2\]
+where \(\epsilon_2 \ind Y_2\). Next,
+\[Y_3 = t_{31} Y_1 + t_{32} Y_2 + \epsilon_3\]
+where \(\epsilon_3 \ind Y_3\). Then we continue as in the Gram-Shmidt process. What we get is
+\[\begin{pmatrix}
+1 & 0 & 0 & \cdots & 0 \\
+-t_{21} & 1 & 0 & \cdots & 0 \\
+-t_{31} & -t_{32} & 1 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots
+\end{pmatrix}
+\begin{pmatrix}
+Y_1 \\
+\vdots \\
+Y_p
+\end{pmatrix}
+=
+\begin{pmatrix}
+\epsilon_1 \\
+\vdots \\
+\epsilon_p
+\end{pmatrix}\]
+We have written
+\[LY = e\]
+that becomes
+\[L \Sigma_Y L^\intercal = \E[e e^\intercal].\]
+Note that that \(e\) are not inependent a priori. Set \(\E[ee^\intercal] = \Lambda\). We call the elements of \(\Sigma_Y\) the \emph{innovation variance}. Finally, compare the Cholesky decomposition to the eigen decomposition:
+\[\Sigma = L^{-1} \Lambda L^{-\intercal}, \qquad \Sigma = Q D Q^{\intercal}\]
+The requirement that \(Q\) is orthogonal becomes a troublesome constraint in some proofs, versus the \(L\) matrix has no such constraints on the lower diagonal.
+
+Since we are in the high-dimensioal setting, we only take this Gram-Schmidt / AR lag process up to \(\ell\) lags. This gives us an estimator of the precision matrix. Then we get
+\[\hat \Omega = \hat L^{\intercal} \hat \Lambda^{-1} \hat L\]
+Peter Bickel provided an interpretation of this method, wherien \(\ell\) plays the same role in this autoregressive interpretation that the bandwidth \(B\) plays in an MA interpretation of the covariance matrix estimation.
+
+\textbf{Graphical lasso}: Given data \(X_1, \dots, X_n \sim \N(0, \Sigma)\), we minimize
+\[-\log \det \Omega - \Tr(\Omega \hat \Sigma_n) + \lambda |\Omega|_1\]
+where \(|\Omega|_1 = \sum_{j,k} |\omega_{jk}|\). This method was proposed by Firedman, Hastie, Tibshirani in 2008. Since this is a convex optimization problem, it can be computed.
+
+The motivation is as follows: the density of normal observations is
+\[(2\pi)^{-np/2} \det \Sigma^{-n/2} \exp \left( \sum_i -X_i^\intercal \Omega X_i / 2 \right)\]
+Take the log
+\[\begin{gathered}(- n/2) \log \det \Sigma + (-1/2) \sum_i X_i^\intercal \Omega X_i \\
+= (n/2) \log \det \Omega - (1/2) \Tr(\Omega n\Sigma_n)\end{gathered}\]
+So the graphical lasso estimator is a form of \(\ell_1\)-regularized MLE.
+
+The asymptotics of the graphical lasso estimator for the time-series setting are developed in Chen, Xu, Wu (2013).
+
+\textbf{Dantzig Estimator}: Tony Cai developed this method, which he called the Clime estimator.
+
+The exact relationship holds:
+\[\Sigma \Omega = I\]
+but there is no \(\Omega\) that satisfies \(\Sigma_n \Omega = I\) exactly. However, we can relax this
+\[\min |\Omega|_1 \quad \st |\Sigma_n \Omega - I|_\infty \leq \lambda\]
+This is linear programming. If we choose \(\lambda\) well enough, we can get a solution.

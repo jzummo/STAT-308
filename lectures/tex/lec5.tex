@@ -1,0 +1,377 @@
+\section{Lecture 5}
+
+\subsection*{Stationarity of a Nonlinear AR(1) Process}
+Consider the stochastic recurrence equation
+
+\[X_t = F(X_{t-1},\epsilon_t),\]
+
+where \((\epsilon_t)_{t\in\mathbb Z}\) is an iid sequence.
+
+We can think of the construction of a stationary solution as a stochastic analogue of the classical fixed-point theorem. To clarify, we are not solving
+
+\[x^*=F(x^*,\epsilon)\]
+
+for a point \(x^*\) in the state space. Rather, we seek a random variable \(X\), independent of a fresh innovation \(\epsilon\), such that
+
+\[X\overset d=F(X,\epsilon).\]
+
+For each innovation \(\epsilon\), define the stochastic Lipschitz constant
+
+\[L_\epsilon
+=
+\sup_{x\neq x'}
+\frac{|F(x,\epsilon)-F(x',\epsilon)|}{|x-x'|}.\]
+
+If \(F(\cdot,\epsilon)\) is differentiable, then
+
+\[L_\epsilon=\sup_x\left|\frac{\partial}{\partial x}F(x,\epsilon)\right|.\]
+
+\subsection*{Theorem}
+Suppose
+
+\[\rho:=EL_\epsilon<1\]
+
+and, for some \(x_0\in\mathbb R\),
+
+\[E|F(x_0,\epsilon)|<\infty.\]
+
+Then:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The stochastic recurrence equation admits a unique stationary causal solution
+  \[X_t^*=g(\epsilon_t,\epsilon_{t-1},\ldots).\]
+\item
+  Its marginal distribution
+  \[\pi=\mathcal L(X_t^*)\]
+  is the unique stationary distribution among distributions with finite first moment.
+\item
+  For any deterministic initial value \(x\),
+  \[X_n(x)\Rightarrow\pi.\]
+\item
+  More strongly, the process satisfies geometric moment contraction:
+  \[E|X_n(x)-X_n(x')|
+  \le
+  \rho^n|x-x'|.\]
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection*{Proof}
+First observe that the integrability assumption at one point implies integrability at every point. For any \(x\),
+
+\[\begin{aligned}
+E|F(x,\epsilon)|
+&\le
+E|F(x_0,\epsilon)|
++
+E|F(x,\epsilon)-F(x_0,\epsilon)|\\
+&\le
+E|F(x_0,\epsilon)|
++
+EL_\epsilon|x-x_0|\\
+&=
+E|F(x_0,\epsilon)|+\rho|x-x_0|
+<\infty.
+\end{aligned}\]
+
+Define the forward iteration starting from \(x\) by
+
+\[X_n(x)
+=
+F_{\epsilon_n}\circ\cdots\circ F_{\epsilon_1}(x),
+\qquad
+F_\epsilon(x):=F(x,\epsilon).\]
+
+Instead of studying the forward iteration directly, define the backward iteration
+
+\[Z_n(x)
+=
+F_{\epsilon_0}\circ F_{\epsilon_{-1}}
+\circ\cdots\circ F_{\epsilon_{-n+1}}(x).\]
+
+Since the innovations are iid,
+
+\[Z_n(x)\overset d=X_n(x).\]
+
+We will show that \(Z_n(x)\) converges almost surely and in \(L^1\) to a random variable \(Z_\infty\) that does not depend on \(x\).
+
+\subsection*{Step 1: Convergence of the backward iteration}
+Consider successive backward iterations. We have
+
+\[\begin{aligned}
+|Z_n(x)-Z_{n-1}(x)|
+&\le
+L_{\epsilon_0}L_{\epsilon_{-1}}\cdots
+L_{\epsilon_{-n+2}}
+\,|F_{\epsilon_{-n+1}}(x)-x|.
+\end{aligned}\]
+
+Taking expectations and using independence,
+
+\[E|Z_n(x)-Z_{n-1}(x)|
+\le
+\rho^{n-1}E|F(x,\epsilon)-x|.\]
+
+Therefore
+
+\[\sum_{n=1}^\infty
+E|Z_n(x)-Z_{n-1}(x)|
+<\infty.\]
+
+By Tonelli\textquotesingle s theorem,
+
+\[E\left[
+\sum_{n=1}^\infty
+|Z_n(x)-Z_{n-1}(x)|
+\right]
+<\infty.\]
+
+Hence
+
+\[\sum_{n=1}^\infty
+|Z_n(x)-Z_{n-1}(x)|
+<\infty
+\qquad\text{a.s.}\]
+
+Thus \(Z_n(x)\) is almost surely Cauchy and therefore
+
+\[Z_n(x)\to Z_\infty(x)
+\qquad\text{a.s.}\]
+
+Moreover, for \(m>n\),
+
+\[E|Z_m(x)-Z_n(x)|
+\le
+\sum_{j=n+1}^mE|Z_j(x)-Z_{j-1}(x)|
+\to0.\]
+
+Hence \(Z_n(x)\) is Cauchy in \(L^1\), so
+
+\[Z_n(x)\to Z_\infty(x)
+\qquad\text{in }L^1.\]
+
+\subsection*{Step 2: The limit does not depend on the initial condition}
+For two initial conditions \(x,x'\), coupling the backward iterations using the same innovations gives
+
+\[|Z_n(x)-Z_n(x')|
+\le
+\left(
+\prod_{j=0}^{n-1}L_{\epsilon_{-j}}
+\right)|x-x'|.\]
+
+Taking expectations,
+
+\[E|Z_n(x)-Z_n(x')|
+\le
+\rho^n|x-x'|.\]
+
+Since both backward iterations converge in \(L^1\),
+
+\[E|Z_\infty(x)-Z_\infty(x')|
+=
+0.\]
+
+Therefore
+
+\[Z_\infty(x)=Z_\infty(x')
+\qquad\text{a.s.}\]
+
+Thus the limiting random variable is independent of the initial condition. We denote it simply by \(Z_\infty\).
+
+\subsection*{Step 3: Causal representation}
+Each \(Z_n(x)\) is measurable with respect to
+
+\[\sigma(\epsilon_0,\epsilon_{-1},\ldots,\epsilon_{-n+1}).\]
+
+Since \(Z_n(x)\to Z_\infty\) almost surely,
+
+\[Z_\infty
+\in
+\sigma(\epsilon_0,\epsilon_{-1},\epsilon_{-2},\ldots).\]
+
+Hence there exists a measurable function \(g\) such that
+
+\[Z_\infty
+=
+g(\epsilon_0,\epsilon_{-1},\epsilon_{-2},\ldots).\]
+
+Define
+
+\[X_t^*
+=
+g(\epsilon_t,\epsilon_{t-1},\ldots).\]
+
+Because the innovation sequence is iid, \((X_t^*)\) is stationary. Furthermore, passing to the limit in the backward recursion gives
+
+\[X_t^*=F(X_{t-1}^*,\epsilon_t)
+\qquad\text{a.s.}\]
+
+Thus \(X_t^*\) is a stationary causal solution. Let
+
+\[\pi=\mathcal L(X_t^*).\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection*{Geometric Moment Contraction}
+Consider two forward trajectories driven by the same future innovations:
+
+\[X_n(x)
+=
+F_{\epsilon_n}\circ\cdots\circ F_{\epsilon_1}(x)\]
+
+and
+
+\[X_n(x')
+=
+F_{\epsilon_n}\circ\cdots\circ F_{\epsilon_1}(x').\]
+
+Pathwise,
+
+\[|X_n(x)-X_n(x')|
+\le
+\left(\prod_{j=1}^nL_{\epsilon_j}\right)|x-x'|.\]
+
+Therefore
+
+\[\boxed{
+E|X_n(x)-X_n(x')|
+\le
+\rho^n|x-x'|.
+}\]
+
+This property is called \textbf{geometric moment contraction (GMC)}.
+
+Now take \(X_0^*\sim\pi\), constructed from the past innovations
+
+\[\epsilon_0,\epsilon_{-1},\ldots.\]
+
+Then \(X_0^*\) is independent of the future innovations \(\epsilon_1,\ldots,\epsilon_n\). Couple the stationary and nonstationary chains using the same future innovations. Then
+
+\[\begin{aligned}
+E|X_n(x)-X_n(X_0^*)|
+&\le
+E\left[
+\left(\prod_{j=1}^nL_{\epsilon_j}\right)
+|x-X_0^*|
+\right]\\
+&=
+\rho^nE|x-X_0^*|.
+\end{aligned}\]
+
+Since
+
+\[X_n(X_0^*)\sim\pi,\]
+
+we obtain
+
+\[W_1\big(\mathcal L(X_n(x)),\pi\big)
+\le
+\rho^nE|x-X_0^*|.\]
+
+Thus the distribution of the nonstationary chain converges exponentially fast to the stationary distribution in \(W_1\), and hence
+
+\[X_n(x)\Rightarrow\pi.\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection*{\texorpdfstring{\(L^p\) Extension}{L\^{}p Extension}}
+More generally, suppose for some \(p>0\),
+
+\[\rho_p:=EL_\epsilon^p<1\]
+
+and
+
+\[E|F(x_0,\epsilon)|^p<\infty\]
+
+for some \(x_0\).
+
+Then
+
+\[E|X_n(x)-X_n(x')|^p
+\le
+\rho_p^n|x-x'|^p.\]
+
+Similarly,
+
+\[E|Z_n(x)-Z_{n-1}(x)|^p
+\le
+C\rho_p^{n-1}.\]
+
+For \(p\ge1\), the previous argument can be repeated using the \(L^p\) norm and Minkowski\textquotesingle s inequality.
+
+\textbf{Homework} Extend the proof to the case where \(0 < p < 1\).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection*{Negative Lyapunov Exponent Condition}
+The moment condition
+
+\[EL_\epsilon^p<1\]
+
+is stronger than what is needed merely for pathwise contraction.
+
+A more general condition is
+
+\[E\log L_\epsilon<0,\]
+
+together with an appropriate integrability condition such as
+
+\[E\log^+|F(x_0,\epsilon)-x_0|<\infty.\]
+
+Indeed,
+
+\[\frac1n
+\log\left(
+\prod_{j=1}^nL_{\epsilon_j}
+\right)
+=
+\frac1n\sum_{j=1}^n\log L_{\epsilon_j}
+\longrightarrow
+E\log L_\epsilon<0
+\qquad\text{a.s.}\]
+
+by the strong law of large numbers. Hence
+
+\[\prod_{j=1}^nL_{\epsilon_j}\]
+
+decays exponentially fast almost surely.
+
+The quantity
+
+\[E\log L_\epsilon\]
+
+can therefore be interpreted as a Lyapunov exponent for the stochastic dynamical system. A negative Lyapunov exponent says that trajectories driven by the same innovation sequence forget their initial conditions exponentially fast almost surely.
+
+Notice that
+
+\[EL_\epsilon<1
+\quad\Longrightarrow\quad
+E\log L_\epsilon
+\le
+\log EL_\epsilon<0\]
+
+by Jensen\textquotesingle s inequality. Thus the negative Lyapunov exponent condition is more general than first-moment contraction.
+
+However,
+
+\[E\log L_\epsilon<0\]
+
+does not in general imply \(EL_\epsilon^p<1\) for a prescribed \(p\), so pathwise exponential contraction should be distinguished from \(p\)th geometric moment contraction.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection*{Remark: Backward Iteration and Coupling from the Past}
+The construction above is often called the \textbf{backward iteration} method for stochastic recurrence equations or iterated random functions.
+
+It is closely related conceptually to coupling from the past, but it should be distinguished from the exact CFTP algorithm of Propp and Wilson.
+
+Here we establish asymptotic coalescence:
+
+\[|Z_n(x)-Z_n(x')|\to0
+\qquad\text{as }n\to\infty.\]
+
+In coupling from the past, one instead seeks a finite random time \(T\) such that trajectories from all possible initial states have exactly coalesced by time \(0\). This permits exact simulation from the stationary distribution after finite computation.
+
+Ordinary Lipschitz contraction generally gives asymptotic coalescence, but not finite-time exact coalescence.

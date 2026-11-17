@@ -1,0 +1,216 @@
+\section{Lecture 1}
+
+\subsection*{Review of AR(1) process.}
+Let \(\epsilon_t \sim\) iid. Let \(a \in \mathbb{R}\) be fixed.
+\[X_t = a X_{t-1} + \epsilon_t\]
+Unraveling this, we are led to a solution of the recursion
+\[X_t = \sum_{i=0}^\infty a^i \epsilon_{t-i}\]
+In what sense does \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) exist? Suppose \(Var[\epsilon_t] < \infty\). Then the series above converges in the mean-square sense. For any \(\epsilon > 0\),
+\[\left\|\sum_{i=N}^M a^i \epsilon_{t-i} \right\|_2 = \sigma^2 \sum_{i=N}^M a^i < \epsilon\]
+if \(N, M\) are sufficiently large. This is the Cauchy criterion for the space of square-integrable random variables, and hence a limit exists by completeness. Next, does \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) converge almost surely?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection*{Kolmogorov Two Series Theorem}
+Let \(X_n\) be independent random variables. Then \(\sum_{n=1}^\infty X_n\) converges almost surely if \(\sum_{n=1}^\infty E[X_n]\) and \(\sum_{n=1}^\infty Var[X_n]\) converge almost surely.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection*{Kolmogorov Three Series Theorem}
+Let \(X_n\) be independent random variables. Then \(\sum_{n=1}^\infty X_n\) converges almost surely if there exists \(A > 0\) and only if for any \(A > 0\):
+
+\begin{itemize}
+\tightlist
+\item
+  \(\sum_{n=1}^\infty P(|X_n| \geq A)\) converges
+\item
+  Let \(Y_n = X_n1[|X_n| \leq A]\). Then
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\sum_{n=1}^\infty E[Y_n] < \infty\)
+  \item
+    \(\sum_{n=1}^\infty Var[Y_n] < \infty\)
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Suppose \(Var[\epsilon_t] < \infty\). We can use the two-series theorem to prove sufficient conditions on \(a\) for which \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) converges.
+\[\sum_{i=0}^\infty E[a^i \epsilon_{t-i}] = \sum_{i=0}^\infty 0 = 0\]
+
+\[\sum_{i=0}^\infty Var[a^i \epsilon_{t-i}] = \sum_{i=0}^\infty a^{2i}\sigma^2 < \infty\]
+
+under the assumption that \(a^{2i} < 1\) or equivalently \(|a| < 1\).
+
+Now suppose only that \(E \log |\epsilon_t| < \infty\). This is a very weak moment condition (finite geometric mean). We can use the Kolmogorov three-series theorem to prove that \(\sum_{i=0}^\infty a^i \epsilon_{t-i}\) converges almost surely.
+
+We have written the solution to the AR(1) recursion as a \emph{causal} process:
+\[X_t = f(\epsilon_t, \epsilon_{t-1}, \dots),\]
+where \(f(x_0, x_1, \dots) = \sum_{i=0}^\infty a^i x_i\).
+
+\textbf{Lemma}
+
+Let \(f(x_0, x_1, \dots)\) be a measurable function and \(\epsilon_t\) an iid sequence. Then
+\[X_t = f(\epsilon_t, \epsilon_{t-1}, \dots)\]
+defines a stationary process. We call this a \emph{Bernoulli shift process}.
+
+\textbf{Proof.}
+
+The marginal distributions are equal; since \((\epsilon_{t_1}, \epsilon_{t_1 - 1}, \dots)\) is equal in distribution to \((\epsilon_{t_1 + \ell}, \epsilon_{t_1 + \ell - 1}, \dots)\), it follows that \(X_{t_1}\) is equal in distribution to \(X_{t_1 + \ell}\). Next, the joint distribution \((X_{t_1}, X_{t_2})\) is equal to that of \((X_{t_1 + \ell}, X_{t_2 + \ell})\). Assume WLOG that \(t_1 > t_2\). Then
+\[X_{t_1} = f(\epsilon_{t_1}, \dots, \epsilon_{t_2 + 1} \epsilon_{t_2}, \epsilon_{t_2 - 1}, \dots)\]
+
+\[X_{t_2} = f(\epsilon_{t_2}, \epsilon_{t_2 - 1}, \dots)\]
+
+So the joint distribution is uniquely characterized by the number of innovations not jointly shared, i.e. \(t_1 - t_2\). Thus the joint distribution is invariant to lag shifts.
+
+\subsection*{Non-Causal AR(1) Process}
+Suppose \(|a| > 1\). There is a stationary solution to the AR(1) recursion which is not causal. The AR(1) recursion is equivalent to
+\[X_{t-1} = X_t /a - \epsilon_t / a\]
+This is an AR(1) recursion forward in time, instead of backwards. The convergence results from above imply that for \(|a| > 1\), the random series
+\[X_t = \sum_{i=1}^\infty \frac{(-1)^i}{a^i} \epsilon_{t+i}\]
+converges almost surely (or in various moments) to a solution of the AR(1) recursion. Yet this it not a causal solution because it depends on future innovations. This solution is practically useless.
+
+\subsection*{Unit-Root AR(1) Process}
+Suppose \(a = 1\). There is no stationary solution to the AR(1) recursion in this case. Attempting to unravel the AR(1) recursion, we get
+\[X_t = \epsilon_t + \epsilon_{t-1} + \cdots = \sum_{i=0}^\infty \epsilon_{t-i}\]
+Unless \(\epsilon_t = 0\) almost surely, this does not converge to a well-defined random variable. Let \(A > 0\) be arbitrary. The first condition of Kolmogorov\textquotesingle s three series theorem necessitates that \(\sum_{i=0}^\infty P(|\epsilon_{t-i}| > A) < \infty\). Since \(\epsilon_{t-i}\) are identically distributed, this necessitates \(P(|\epsilon_t| > A) = 0\). Since \(A > 0\) was arbitrary, this implies \(\epsilon_t = 0\) almost surely.
+
+For any constant \(c\), we can set \(X_t = c\) for \(t \leq 0\) and let \(X_t\) process via the aforementioned AR(1) recursion for \(t \geq 0\). This process is called a \emph{random walk}. It does not forgo its initialization, since \(E[X_t] = c\) for any \(t\) and \(Var[X_t] = t \sigma^2\) for \(t \geq 0\), assuming necessary moments.
+
+Suppose \(a = -1\). Then TODO
+
+\subsection*{Nonlinear AR(1) Process}
+Let \(f\) be a measurable function. Define
+\[X_t = f(X_{t-1}, \epsilon_t)\]
+This is the generic form for Markov chain with state space \(\R\). We can unravel the recursion as
+\[X_t = f(f(X_{t-2}, \epsilon_{t-1}), \epsilon_t)\]
+
+\[X_t = f(f(f(X_{t-3}, \epsilon_{t-2}), \epsilon_{t-1}), \epsilon_t)\]
+
+We want to impose conditions under which we can define the limit \(g\) of the iterated function system so that
+\[X_t = g(\epsilon_t, \epsilon_{t-1}, \epsilon_{t-2}, \dots)\]
+The above recursion gives an implicit definition of \(g\) via
+\[g(\epsilon_t, \epsilon_{t-1}, \dots) = f(g(\epsilon_{t-1}, \epsilon_{t-2}, \dots), \epsilon_t)\]
+
+\subsection*{Stochastic Gradient Descent}
+We want to produce an estimate \(\hat\theta\) of a parameter \(\theta\) of a distribution or system. For instance, if \(f_\theta\) is the marginal likelihood of our data, and we want to perform online MLE. Let \(\hat\theta_0\) be arbitrary and define
+\[\hat\theta_t = \hat\theta_{t-1} - \gamma_t \frac{d}{d\theta} \log f_\theta(\epsilon_t) \Big\vert_{\theta = \hat\theta_{t-1}}\]
+where \(\gamma_t > 0\) is the learning rate sequence. The upshot of this approach is that we only need one gradient computation per step. This defines a discrete-time Markov process. This Markov chain is homogeneous if \(\gamma_t \equiv \gamma\) is constant.
+
+\subsection*{AR(p) Process}
+Consider the recursion
+\[X_t = a_1 X_{t-1} + \cdots + a_p X_{t-p} + \epsilon_t\]
+Let \(B\) denote the backshift operator. Let \(p(z) = 1 - \sum_{i=1}^p a_i z^i\) denote the AR polynomial. We can write the recursion as
+\[p(B)X_t = \epsilon_t\]
+A formal solution is given by
+\[X_t = p(B)^{-1} \epsilon_t\]
+To resolve this formal solution into a well-defined stationary causal solution, we require that \(|z_j| < 1\) for every root \(z_j\) of the AR polynomial \(p(z)\).
+
+Suppose we have data \(X_1, \dots, X_n\). How can we estimate these parameters \(a_1, \dots, a_p\)? The least squares approach is:
+\[\min_{a_1, \dots, a_p} \sum_{t=p+1}^n (X_t - (a_1 X_{t-1} + \dots + a_p X_{t-p}))^2\]
+Classical time series analysis presumse that \(p\) is fixed but small, so that OLS is a feasible estimation strategy. We can write the normal equations as
+\[\begin{bmatrix}
+\hat a_1 \\
+\vdots \\
+\hat a_p
+\end{bmatrix}
+= (Z^\intercal Z)^{-1} Z^\intercal Y,\]
+
+\[Y = 
+\begin{bmatrix}
+X_n \\
+\vdots \\
+X_{p+1}
+\end{bmatrix}\]
+
+\[Z =
+\begin{bmatrix}
+X_{n-1} & \cdots & X_{n-p} \\
+\vdots & \ddots & \vdots \\
+X_p & \cdots & X_1
+\end{bmatrix}\]
+
+We need \(n - p > p\) in order to compute the least squares estimate. Under this regime:
+\[\sqrt{n}(\hat a - a) \implies   N(0, \sigma^2_\epsilon \Gamma_p^{-1})\]
+where
+\[\Gamma_p =
+\begin{bmatrix}
+\gamma(0) & \gamma(1) & \cdots & \gamma(p - 1) \\
+\gamma(1) & \gamma(0) & \cdots & \gamma(p - 2) \\
+\vdots & \vdots & \ddots & \vdots \\
+\gamma(p - 1) & \gamma(p - 2) &  \cdots & \gamma(0)
+\end{bmatrix}\]
+In the high-dimensional regime where \(p \sim cn\), both consistency \& the CLT fail.
+
+If \(p = o(n^{1/3})\), then \(\hat a\) is consistent for \(a\) (Berk 1974). Since the dimensionality is growing, we need to be careful to assert the relevant norm in which to measure consistency. The precise result is
+\[\max_{1 \leq j \leq p} |\hat a_j - a_j| \overset{p}{\rightarrow} 0\]
+How about other norms?
+
+\subsection*{Vector Autoregression}
+Let \(X_t \in \mathbb{R}^p\) for \(t = 1, \dots, p\). The VAR(1) recursion is
+\[X_t = AX_{t-1} + \epsilon_t\]
+where \(A\) is a \(p \times p\) matrix. For parismony, we might impose structural assumptions on \(A\). We can estimate \(A\) via
+\[\min_A \sum_{t=2}^n \|X_t - AX_{t-1}\|_2^2\]
+splitting the objective into coordinates \(j = 1, \dots, p\), this becomes
+\[\min_{A_{j\cdot}} \sum_{t=2}^n (X_{t,j} - A_{\cdot j} X_{t-1})^2\]
+The solution to each of these \(p\) least squares problems \(A_{j\cdot}\) is given by OLS. The design matrix in common across these OLS regressions is
+\[\begin{bmatrix}
+X_{1,1} & \cdots & X_{1,p} \\
+\vdots & \ddots & \vdots \\
+X_{n-1, 1} & \cdots & X_{n-1, p}
+\end{bmatrix}\]
+The row \(A_{j\cdot}\) is obtained by the regression of the following response vector:
+\[\begin{bmatrix}
+X_{2,j} \\
+\vdots \\
+X_{n,j}
+\end{bmatrix}\]
+
+\subsection*{Dantzig Method}
+Right-multiplying the AR(1) recursion by \(X_{t-1}^\intercal\), we have
+\[X_t X_{t-1}^\intercal = A X_{t-1} X_{t-1}^\intercal + \epsilon_{t-1} X_{t-1}^\intercal\]
+Taking expectations,
+\[E[X_t X_{t-1}^\intercal] = A E[X_{t-1}X_{t-1}^\intercal] + 0\]
+Let
+\[\Gamma_0 =
+\begin{bmatrix}
+E[X_{t,1}^2] & E[X_{t,1}X_{t,2}] & \cdots & E[X_{t,1}X_{t,p}] \\
+E[X_{t,2}X_{t,1}] & E[X_{t,2}^2] & \cdots & E[X_{t,2}X_{t,p}] \\
+\vdots & \vdots & \ddots & \vdots \\
+E[X_{t,p}X_{t,1}] & E[X_{t,p}X_{t,2} & \cdots & E[X_{t,p}^2]
+\end{bmatrix}
+=
+E[X_t X_t^\intercal]\]
+
+\[\Gamma_1 =
+\begin{bmatrix}
+E[X_{t,1}X_{t-1,1}] & E[X_{t,1}X_{t-1,2}] & \cdots & E[X_{t,1}X_{t-1,p}] \\
+E[X_{t,2}X_{t-1,1}] & E[X_{t,2}X_{t-1,2}] & \cdots & E[X_{t,2}X_{t-1,p}] \\
+\vdots & \vdots & \cdots & \vdots \\
+E[X_{t,p}X_{t-1,1}] & E[X_{t,p}X_{t-1,2}] & \cdots & E[X_{t,p}X_{t-1,p}]
+\end{bmatrix}
+=
+E[X_t X_{t-1}^\intercal]\]
+
+Then we have the population equation
+\[\Gamma_1 = A \Gamma_0\]
+Let \(\hat\Gamma_1\) and \(\hat\Gamma_0\) be the plug-in estimates. The Dantzig estimate of \(A\) is
+\[\min_A \|A\|_1, \quad \text{s.t. } \|\hat\Gamma_1 - A\hat\Gamma_0\|_\infty \leq \lambda\]
+The norms \(\|\cdot\|_1\) and \(\|\cdot\|_\infty\) are the vectorized \(\ell_1\) and \(\ell_\infty\) norms. This is a linear program with \(p^2\) inputs \(A_{ij}\). However, this optimization problem decouples into \(p\) subproblems, each with \(p\) inputs, in the following way:
+
+TODO
+
+\subsection*{Inference of Means}
+Let \(X_1, \dots, X_n\) be realizations of a stationary process. How can we estimate the marginal mean \(\mu\)? The BLUE estimate can be written as
+\[\tilde \mu = \sum_{i=1}^n w_i X_i = w^\intercal X\]
+Unbiasedness requires that \(\sum_{i=1}^n w_i = 1\). The variance of \(\tilde \mu\) is \(w^\intercal \Gamma_n w\). The Lagrangian for this linearly constrained quadratic program is thus
+\[w^\intercal \Gamma_n w - \lambda (w^\intercal \mathbf{1} - 1)\]
+
+The stationarity conditions are
+\[2\Gamma_n w - \lambda \mathbf{1} = 0 \iff w = \frac{\lambda}{2}\Gamma_n^{-1}\mathbf{1}\]
+With the normalization constraint, the solution becomes
+\[w = \frac{\Gamma_n^{-1} \mathbf{1}}{\mathbf{1}^\intercal \Gamma_n^{-1} \mathbf{1}}\]
+The BLUE is
+\[\tilde \mu = \frac{\mathbf{1}^\intercal \Gamma_n^{-1} X}{\mathbf{1}^\intercal \Gamma_n^{-1} \mathbf{1}}\]
